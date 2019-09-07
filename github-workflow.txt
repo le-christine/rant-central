@@ -1,0 +1,12 @@
+Steps to Github Collaboration
+
+1. cd into your project folder.
+2. git status to make sure you're on your branch.
+3a. work on your code - remember to add comments
+3b. git add .
+3c. git commit -m 'message clearly stating what you've done'
+3d. git push origin <your-branch>
+4. make pull request
+5. inform the team of your request.
+6. decide on merge
+7. git pull 
