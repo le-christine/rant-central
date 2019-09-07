@@ -9,4 +9,4 @@ Steps to Github Collaboration
 4. make pull request
 5. inform the team of your request.
 6. decide on merge
-7. git pull 
+7. git pull origin master
