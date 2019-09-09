@@ -11,11 +11,11 @@
     <link href="https://fonts.googleapis.com/css?family=Archivo:400,700|Permanent+Marker&display=swap" rel="stylesheet">
 
 
-  </head>
+  </head
   <body>
   <div class="topnav">
   <a href="#login">Login</a>
-  <a href="#signup">Sign-Up</a>
+  <a class="signup">Sign-Up</a>
 </div>
 
 <div>
@@ -37,27 +37,18 @@
   </form>
 <!-- sign up form  -->
 
-<!-- <div class="LoginForm">
-  <form class="login-container">
-         <div class="login-section">
-           <label><b>Username</b></label>
-           <input class="login-input" type="text"
-           placeholder="Enter Username" name="usrname" required>
-           <label><b>Password</b></label>
-           <input class="login-input" type="password" placeholder="Enter Password" name="psw" required>
-           <button class="login-button"
-           type="submit">Rant Away!</button>
-           <input class="login-check" type="checkbox" checked="checked"> Remember me
-         </div>
-       </form>
-
-       <div class="login-container">
-  <button onclick="document.getElementById('id01').style.display='none'"
-  type="button" class="login-button">Cancel</button>
-  <span class="login-forgot">Forgot <a href="#">password?</a></span>
-</div> -->
-
-
+<div id="signUpForm">
+  <form>
+    <br/>
+    <h3> Sign up for Rant Central</h3><br/>
+    email:
+    <input id="signUpEmail" type="email" placeholder="Email address"/><br/></br>
+    username:
+    <input id="signUpUsername" type="text" placeholder="username"/></br></br>
+    password:
+    <input id ="signUpPassword" type="password"/></br></br>
+    <input class="signUpSubmit" type="submit"/>
+  </form>
 
 </div>
 
@@ -86,6 +77,6 @@ Important Class Assignments:
 <!-- main page -->
 
 
-
+<script src="js/script.js"></script>
   </body>
 </html>
