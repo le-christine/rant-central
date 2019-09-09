@@ -1,8 +1,8 @@
 body {
   margin:0;
-  font-family: sans-serif;
   background: #CD5C5C;
   font-size: 16px;
+  font-family: 'Permanent Marker', sans-serif;
 }
 
 .topnav {
@@ -24,9 +24,9 @@ body {
 }
 
 .rant-header {
-  color:white;
-  font-size: 50px;
-  padding:20%;
+  color:black;
+  font-size: 65px;
+  padding:20% 20% 5% 20%;
   margin: 0;
   text-align: center;
 }
@@ -70,4 +70,12 @@ body {
   font-family: "Archivo", sans-serif;
   text-transform: uppercase;
   weight: 700;
+
+  /* main page styling*/
+div h1 {
+  letter-spacing: 6px;
+}
+
+.rant-quote {
+  text-align: center;
 }
