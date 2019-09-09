@@ -4,8 +4,11 @@
     <meta charset="utf-8">
     <title>Rant Central</title>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
+
  <!-- landing page should have:
 1. a nav bar with Sign Up and Login options to the left
 2. center of the page will have logo and an avatar
@@ -17,9 +20,40 @@ Main page should have:
 2b. Each post has title of post, post contents, and comments box and an 'X' on upper right corner
 3a. Sidebar to the right
 4. Regular footer, with group members' names
+
+Important Class Assignments:
+#userPost - A user's post
+#userPostTitle - Title in user post
+#userPostContent - Content in user post
+#userPostComments - Comments in user post
 -->
 
 <!-- main page -->
+
+<!-- nav bar -->
+<nav>
+  <a href="">Home</a>
+  <!-- dropdown menu -->
+  <div class="dropdown">
+    <button class="dropbtn">Username
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Update</a>
+      <a href="#">Log Out</a>
+    </div>
+  </div>
+</nav>
+
+<div class ="posts-container">
+  <div class="userPost">
+    <h3 class = "userPostTitle"></h3>
+    <p class = "userPostContent"></p>
+    <div class = "userPostComents">
+    </div>
+  </div>
+</div>
+
 
   </body>
 </html>
