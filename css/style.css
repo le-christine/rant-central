@@ -1,8 +1,8 @@
 body {
   margin:0;
+  font-family: sans-serif;
   background: #CD5C5C;
   font-size: 16px;
-  font-family: 'Permanent Marker', sans-serif;
 }
 
 .topnav {
@@ -24,9 +24,10 @@ body {
 }
 
 .rant-header {
-  color:black;
-  font-size: 65px;
-  padding:20% 20% 5% 20%;
+  font-family: "Permanent Marker", sans-serif;
+  color:white;
+  font-size: 50px;
+  padding:20%;
   margin: 0;
   text-align: center;
 }
@@ -39,6 +40,7 @@ body {
   bottom:0;
 
 }
+
 
 /* main page styling */
 .posts-container>h4 {
@@ -66,13 +68,18 @@ body {
 
 }
 
+.userPostContent {
+  margin: 2%;
+}
+
 .userPost>h3{
   font-family: "Archivo", sans-serif;
   font-size: 2rem;
+  margin: 2%;
 }
 
 .userPostComents{
-  margin-top: 2%;
+  margin: 2%;
 }
 
 .userPostComents>h4{
@@ -81,14 +88,69 @@ body {
   weight: 700;
 }
 
-  /* main page styling*/
-div h1 {
-  letter-spacing: 6px;
+/* navbar styling */
+.mainNav{
+  overflow: hidden;
+  background-color: lightgray;
+  font-family: Arial;
 }
 
-.rant-quote {
+/* Links inside the navbar */
+.mainNav a {
+  color: #CD5C5C;
+  float: right;
+  font-size: 30px;
   text-align: center;
-  word-wrap: break-word;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: right;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 30px;
+  border: none;
+  outline: none;
+  color: #CD5C5C;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 /* side bar styling */
