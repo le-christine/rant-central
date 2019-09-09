@@ -38,7 +38,6 @@ body {
   left:0;
   bottom:0;
 
-
 }
 
 /* main page styling */
@@ -80,6 +79,7 @@ body {
   font-family: "Archivo", sans-serif;
   text-transform: uppercase;
   weight: 700;
+}
 
   /* main page styling*/
 div h1 {
@@ -89,4 +89,32 @@ div h1 {
 .rant-quote {
   text-align: center;
   word-wrap: break-word;
+}
+
+/* side bar styling */
+.sidenav {
+  width: 200px;
+  height: 300px;
+  position:fixed;
+  border: solid white;
+  z-index: 1;
+  top: 20px;
+  right: 10px;
+  background: black;
+  overflow-x: hidden;
+  padding: 20px 0;
+  margin-top: 30px;
+}
+
+.sidenav a {
+  padding: 15px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #CD5C5C;
+  display: block;
+
+}
+
+.sidenav a:hover {
+  color: white;
 }
