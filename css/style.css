@@ -1,0 +1,31 @@
+body {
+  margin:0;
+  font-family: sans-serif;
+   background: #CD5C5C;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: lightgray;
+}
+
+.topnav a {
+  float: right;
+  color: #CD5C5C;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 30px;
+}
+
+.topnav a:hover {
+  color: black;
+}
+
+.rant-header {
+  color:white;
+  font-size: 50px;
+  padding:20%;
+  margin: 0;
+  text-align: center;
+}
