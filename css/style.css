@@ -188,7 +188,7 @@ body {
   margin: auto;
 }
 
-.form {
+.loginForm {
   position: relative;
   z-index: 1;
   max-width: 360px;
@@ -197,7 +197,7 @@ body {
   text-align: center;
 }
 
-.form input {
+.loginForm input {
   font-family: sans-serif;
   outline:1;
   width: 100%;
@@ -208,7 +208,7 @@ body {
   font-size: 14px;
 }
 
-.form button {
+.loginForm button {
   font-family: sans-serif;
   border: 0
   padding: 15px;
@@ -217,20 +217,20 @@ body {
   cursor: pointer;
 }
 
-.form button:hover, .form button:active {
+.loginForm button:hover, .loginForm button:active {
   background-color: black;
 }
 
-.form .message {
+.loginForm .message {
   font-size: 18px;
 }
 
-.form .message a {
+.loginForm .message a {
   color:gray;
   text-decoration: none;
 }
 
-.form-register-form {
+.login-page {
   display:none;
 }
 
@@ -246,3 +246,6 @@ body {
   text-align: center;
 }
 
+#signUpSubmit {
+  border: 1px solid black;
+}

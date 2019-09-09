@@ -20,6 +20,7 @@ function userSignUp() {
 
 
 let data;
+
 function postData(email, username, password) {
   fetch('http://thesi.generalassemb.ly:8080/signup', {
     method: 'POST',
@@ -34,10 +35,12 @@ function postData(email, username, password) {
   })
   .then((res) => {
     console.log(res);
-    data = res;
-    // res.json().then(function(result) {
-    //   token = result.token;
-    // });
+  })
+  .then((res) => {
+    return(res.json())
+    res.json().then(function(result) {
+    let token = result.token;
+     });
   })
   .catch((error) => {
     console.log(error);
