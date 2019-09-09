@@ -1,6 +1,6 @@
 body {
   margin:0;
-  font-family: sans-serif;
+  font-family: 'Permanent Marker', sans-serif;
    background: #CD5C5C;
 }
 
@@ -23,9 +23,18 @@ body {
 }
 
 .rant-header {
-  color:white;
-  font-size: 50px;
-  padding:20%;
+  color:black;
+  font-size: 65px;
+  padding:20% 20% 5% 20%;
   margin: 0;
   text-align: center;
+}
+
+div h1 {
+  letter-spacing: 6px;
+}
+
+.rant-quote {
+  text-align: center;
+
 }
