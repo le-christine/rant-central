@@ -2,7 +2,7 @@
 Rant Central is where you can go to post anything you want without judgement.
 
 # Team Members
-Christine Le (@le-christine)
+Christine Le (@le-christine)<br/>
 Ramel Haines (@EngineerMel)
 
 # Planning
