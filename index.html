@@ -3,9 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>Rant Central</title>
-    <link rel="stylesheet" href="/css/reset.css" >
+    <link rel="stylesheet" type= "text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    </head>
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
   <body>
   <div class="topnav">
   <a href="#login">Login</a>
@@ -16,12 +18,7 @@
   <h1 class="rant-header">Rant Central</h1>
 </div>
 
-<i class="fas fa-address-card"></i>
-
-
-
-
-
+<i class="fa fa-address-card"></i>
 
 
  <!-- landing page should have:
@@ -35,7 +32,42 @@ Main page should have:
 2b. Each post has title of post, post contents, and comments box and an 'X' on upper right corner
 3a. Sidebar to the right
 4. Regular footer, with group members' names
+
+Important Class Assignments:
+#userPost - A user's post
+#userPostTitle - Title in user post
+#userPostContent - Content in user post
+#userPostComments - Comments in user post
 -->
+
+<!-- main page -->
+
+<!-- nav bar -->
+<nav>
+  <a href="">Home</a>
+  <!-- dropdown menu -->
+  <div class="dropdown">
+    <button class="dropbtn">Username
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Update</a>
+      <a href="#">Log Out</a>
+    </div>
+  </div>
+</nav>
+
+<div class ="posts-container">
+  <div class="userPost">
+    <h3 class = "userPostTitle"></h3>
+    <p class = "userPostContent"></p>
+    <div class = "userPostComents">
+    </div>
+  </div>
+</div>
+
+<div class="sidebar">
+</div>
 
   </body>
 </html>
