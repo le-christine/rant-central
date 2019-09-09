@@ -7,7 +7,7 @@ Ramel Haines (@EngineerMel)
 
 # Planning
 <html>
-  <img src="images/wireframe-rant-central_1.jpg" width=100/>
-  <img src="images/wireframe-rant-central_2.png" width=100/>
-  <img src="images/wireframe-rant-central_3.png" width=100/>
+  <img src="images/wireframe-rant-central_1.jpg" width=500/>
+  <img src="images/wireframe-rant-central_2.png" width=500/>
+  <img src="images/wireframe-rant-central_3.png" width=500/>
 </html>
