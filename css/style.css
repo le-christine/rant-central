@@ -32,6 +32,16 @@ body {
   text-align: center;
 }
 
+.footer {
+  color: white;
+  text-shadow: 5px 2px 5px #000000;
+  width: 100%;
+  left:0;
+  bottom:0;
+
+}
+
+
 /* main page styling */
 .posts-container>h4 {
   font-family: "Permanent Marker", sans-serif;
@@ -141,4 +151,32 @@ body {
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+/* side bar styling */
+.sidenav {
+  width: 200px;
+  height: 300px;
+  position:fixed;
+  border: solid white;
+  z-index: 1;
+  top: 20px;
+  right: 10px;
+  background: black;
+  overflow-x: hidden;
+  padding: 20px 0;
+  margin-top: 30px;
+}
+
+.sidenav a {
+  padding: 15px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #CD5C5C;
+  display: block;
+
+}
+
+.sidenav a:hover {
+  color: white;
 }
