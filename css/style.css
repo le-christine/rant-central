@@ -1,7 +1,8 @@
 body {
   margin:0;
+  background: #CD5C5C;
+  font-size: 16px;
   font-family: 'Permanent Marker', sans-serif;
-   background: #CD5C5C;
 }
 
 .topnav {
@@ -30,11 +31,51 @@ body {
   text-align: center;
 }
 
+/* main page styling */
+.posts-container>h4 {
+  font-family: "Permanent Marker", sans-serif;
+  font-size: 2rem;
+  color: white;
+  text-shadow: 5px 2px 5px #000000;
+  text-align: center;
+  margin-top: 3%;
+}
+
+.posts-container {
+  border: 1px solid black;
+  width: 50rem;
+  height: 40rem;
+  overflow: auto;
+}
+
+.userPost {
+  border: 1px solid black;
+  width: 40rem;
+  height: 20rem;
+  margin:4% 0 0 4%;
+  overflow: auto;
+
+}
+
+.userPost>h3{
+  font-family: "Archivo", sans-serif;
+  font-size: 2rem;
+}
+
+.userPostComents{
+  margin-top: 2%;
+}
+
+.userPostComents>h4{
+  font-family: "Archivo", sans-serif;
+  text-transform: uppercase;
+  weight: 700;
+
+  /* main page styling*/
 div h1 {
   letter-spacing: 6px;
 }
 
 .rant-quote {
   text-align: center;
-
 }
