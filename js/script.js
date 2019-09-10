@@ -20,6 +20,7 @@ function userSignUp() {
 
 userSignUp();
 
+// Signup POST Request
 let token;
 function postData(email, username, password) {
   fetch('http://thesi.generalassemb.ly:8080/signup', {
@@ -43,3 +44,15 @@ function postData(email, username, password) {
     console.log(error);
   })
 }
+
+// Login Post Request
+
+// Load all posts
+
+
+// Allow a user to create and delete their own posts.
+// Allow a user to view comments on other posts.
+// Allow a user to create and delete their own comments.
+// Allow a user to update their profile information.
+// Use JavaScript for DOM manipulation.
+// Show user-friendly messages in case any errors occur.
