@@ -167,7 +167,7 @@ function displayUpdateProfile(event) {
   document.querySelector('.updateProfile').style.display = 'block';
 }
 
-// Request to update Profile
+// Request to update Profile. Upon success, informs user
 function updateProfile(event) {
   event.preventDefault();
 
@@ -184,6 +184,7 @@ function updateProfile(event) {
   })
   .then((res) => {
     console.log(res);
+    alert('Your profile has been successfully updated.');
   })
   .catch((err) => {
     console.log(err);
@@ -194,7 +195,7 @@ function updateProfile(event) {
 // Show user-friendly messages in case any errors occur.
 
 
-
+/*
   //R.H.
   // login to rant
 
@@ -240,3 +241,5 @@ function userLog(email, password) {
           console.log(error);
         })
       };
+
+*/
