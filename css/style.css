@@ -155,7 +155,7 @@ body {
 }
 
 /* side bar styling */
-/* .sidenav {
+.sidenav {
   width: 25%;
   height: 80%;
   position:fixed;
@@ -182,21 +182,15 @@ body {
 
 .sidenav a:hover {
   color: white;
-} */
+} 
 
-/* login form */
-.login-page {
-  width: 360px;
-  padding: 10% 0 0;
-  margin: auto;
-}
 
 .loginForm {
   position: relative;
   z-index: 1;
-  max-width: 360px;
+  max-width: 250px;
   margin: 0 auto 100px;
-  padding: 45px;
+  padding: 30px;
   text-align: center;
   display: none;
 }
@@ -223,19 +217,6 @@ body {
 
 .loginForm button:hover, .loginForm button:active {
   background-color: black;
-}
-
-.loginForm .message {
-  font-size: 18px;
-}
-
-.loginForm .message a {
-  color:gray;
-  text-decoration: none;
-}
-
-.login-page {
-  display:none;
 }
 
 /* sign up form */

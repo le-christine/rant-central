@@ -36,7 +36,7 @@ function postData(event) {
       console.log(err);
   })
   window.location.href="./main.html";
-}
+};
 
 // after successul sign up, changes username element
 function changeUser() {
@@ -75,7 +75,6 @@ function createPost(event) {
     event.preventDefault();
     const title = document.querySelector('.title');
     const description = document.querySelector('.description');
-
     fetch("http://thesi.generalassemb.ly:8080/post", {
         method: 'POST',
         headers: {
@@ -104,7 +103,7 @@ function listAllPosts() {
   .then(function(result) {
   console.log(result.json());
   })
-};
+}
 
 
 function populatePosts(data) {
@@ -163,3 +162,52 @@ function manipulateDomPosts(title, content, user) {
 // Allow a user to update their profile information.
 // Use JavaScript for DOM manipulation.
 // Show user-friendly messages in case any errors occur.
+
+  
+  
+  //R.H.
+  // login to rant
+
+function displayLoginIn() {
+  document.querySelector('.loginRant').addEventListener('click', function() {
+    document.querySelector('.loginForm').style.display = 'block';
+  })
+}
+
+displayLoginIn();
+
+function loginUser() {
+  document.querySelector(".rantAway").addEventListener('click', function(e) {
+    e.preventDefault();
+    console.log('test')
+    let email = document.querySelector('#loginEmail').value;
+    let password = document.querySelector('#loginPassword').value;
+    console.log(email, password)
+    postData(email, password);
+  });
+  }
+
+loginUser();
+
+
+function postData(email, password) {
+  fetch('http://thesi.generalassemb.ly:8080/login', {
+  method: 'Post',
+  headers: {
+    'Content-type':'application/json'
+  },
+  body:JSON.stringify({
+                email: email,
+                password: password
+            })
+        })
+        .then(function(response) {
+          return response.json();
+        }).then(function(data) {
+          location.href="main.html";
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+      }
+};
