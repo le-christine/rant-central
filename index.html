@@ -14,7 +14,7 @@
   </head>
   <body>
   <div class="topnav">
-  <a href="#login">Login</a>
+  <a class="loginRant">Login</a>
   <a class="signup">Sign-Up</a>
 </div>
 
@@ -23,19 +23,21 @@
   <p class="rant-quote">“The best and most beautiful things in the world cannot be seen or even touched.
     They must be felt with the a rant”.</p>
 </div>
-<div class="footer">
-  <p>By Ramel Haines and Christine Le</p>
-</div>
 
 <!-- log in form  -->
 
-<div class="login-page">
-<div class="loginForm" class ="form">
-    <form class="register-form">
-    <input type="email" placeholder="Email Address">
-    <input type="text" placeholder="password">
-    <button>Rant Away!<button>
-    <p class="message"> Not Registered? <a href="#">Register</a></p>
+<div class="loginForm">
+    <form onSubmit="postData(event)">
+    <input
+      id="loginEmail"
+      type="email"
+      placeholder="Email Address">
+    <input
+      id="loginPassword"
+      type="password"
+      placeholder="password">
+
+    <button class="rantAway" type="submit">Rant Away!</button>
   </form>
 </div>
 </div>
@@ -56,6 +58,9 @@
   </form>
 </div>
 
+<footer class="footer">
+  <p>By Ramel Haines and Christine Le</p>
+</footer>
  <!-- landing page should have:
 1. a nav bar with Sign Up and Login options to the left
 2. center of the page will have logo and an avatar
