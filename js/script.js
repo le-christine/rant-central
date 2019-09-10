@@ -160,11 +160,15 @@ function manipulateDomPosts(title, content, user) {
 // Allow a user to view comments on other posts.
 // Allow a user to create and delete their own comments.
 // Allow a user to update their profile information.
+function displayUpdateProfile(event) {
+  event.preventDefault();
+  document.querySelector('.updateProfile').style.display = 'block';
+}
 // Use JavaScript for DOM manipulation.
 // Show user-friendly messages in case any errors occur.
 
-  
-  
+
+
   //R.H.
   // login to rant
 
@@ -183,14 +187,14 @@ function loginUser() {
     let email = document.querySelector('#loginEmail').value;
     let password = document.querySelector('#loginPassword').value;
     console.log(email, password)
-    postData(email, password);
+    userLog(email, password);
   });
   }
 
 loginUser();
 
 
-function postData(email, password) {
+function userLog(email, password) {
   fetch('http://thesi.generalassemb.ly:8080/login', {
   method: 'Post',
   headers: {
@@ -209,5 +213,4 @@ function postData(email, password) {
         .catch((error) => {
           console.log(error);
         })
-      }
-};
+      };
