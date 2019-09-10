@@ -11,12 +11,12 @@
     <link href="https://fonts.googleapis.com/css?family=Archivo:400,700|Permanent+Marker&display=swap" rel="stylesheet">
 
   </head>
-  <body>
+  <body onload="changeUser()">
     <!-- nav bar -->
     <nav class="mainNav">
       <!-- dropdown menu -->
       <div class="dropdown">
-        <button class="dropbtn">Username
+        <button class="dropbtn"><span class="loggedInUser">Username</span>
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
@@ -26,13 +26,26 @@
       </div>
       <a href="">Home</a>
     </nav>
+
     <!-- posts container -->
     <div class ="posts-container">
-      <h4>Posts</h4>
+    <h4>Posts</h4>
+
+    <!-- make new post -->
+    <h3>Want to rant?</h3>
+    <div class="newRant">
+      <!-- add a class so you can use DOM -->
+    <input type="text" placeholder="title"/>
+    <!-- add a class so you can use DOM -->
+    <input type="text" placeholder="description"/>
+    <input class="submitRant" type="submit"/>
+    </div>
+
+  <!-- a post -->
       <div class="userPost">
         <p>Posted by: <span class="postOwner"></span></p>
-        <h3 class = "userPostTitle"></h3>
-        <p class = "userPostContent"></p>
+        <h3 class = "userPostTitle">Title</h3>
+        <p class = "userPostContent">Content</p>
         <div class = "userPostComents">
           <h4></h4>
         </div>
@@ -41,11 +54,11 @@
       <!-- Template of user post
 
         <div class="userPost">
-        <h3 class = "userPostTitle"></h3>
-        <p class = "userPostContent"></p>
-        <div class = "userPostComents">
-          <h4></h4>
-        </div>
+          <h3 class = "userPostTitle"></h3>
+          <p class = "userPostContent"></p>
+          <div class = "userPostComents">
+            <h4></h4>
+          </div>
       </div>
 
     -->
