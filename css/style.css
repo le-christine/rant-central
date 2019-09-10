@@ -182,8 +182,7 @@ body {
 
 .sidenav a:hover {
   color: white;
-}
-
+} 
 
 
 .loginForm {
@@ -220,8 +219,7 @@ body {
   background-color: black;
 }
 
-
-
+/* sign up form */
 #signUpForm {
   position: fixed;
   top:20%;
@@ -231,5 +229,5 @@ body {
   background-color: white;
   border-radius: 10%;
   text-align: center;
-  display:none;
+  display: none;
 }
