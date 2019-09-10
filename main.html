@@ -47,7 +47,12 @@
         <h3 class = "userPostTitle">Title</h3>
         <p class = "userPostContent">Content</p>
         <div class = "userPostComents">
-          <h4></h4>
+          <form onSubmit="createComment(event)" class="enterComments">
+            <h4>Comments</h4>
+            <p> Enter a comment: </p>
+            <input class="newComment" type="text"/>
+            <input type="submit"/>
+          </form>
         </div>
       </div>
 

@@ -43,58 +43,6 @@ function changeUser() {
   document.querySelector('.loggedInUser').innerText = localStorage.getItem('username');
 };
 
-function updateDom() {
-    fetch("http://thesi.generalassemb.ly:8080/user/post", {
-        headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user')
-        }
-    })
-    .then((res) => {
-        return res.json();
-    })
-    .then((res) => {
-        const list = document.querySelector('.posts');
-
-        for (let i = 0; i < res.length; i++) {
-            const item = document.createElement('li');
-            const title = document.createElement('h3');
-            const description = document.createElement('p');
-            item.appendChild(title);
-            item.appendChild(description);
-            title.innerText = res[i].title;
-            description.innerText = res[i].description;
-            list.appendChild(item);
-        }
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-}
-
-function createPost(event) {
-    event.preventDefault();
-    const title = document.querySelector('.title');
-    const description = document.querySelector('.description');
-    fetch("http://thesi.generalassemb.ly:8080/post", {
-        method: 'POST',
-        headers: {
-            "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleHByZXNhc2Rmc0B0cmFpbi5jb20iLCJleHAiOjE1NjgxNDkwMDAsImlhdCI6MTU2ODEzMTAwMH0.28OoEKc3FBXn5iqg1d1C_sjuowklVuAPAs8RYAnPXjMoNFuebNRCQJJiU-Dp6PQKhzgNES95ftckHhw9aTNyFg",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            title: title.value,
-            description: description.value
-        })
-    })
-    .then((res) => {
-        console.log(res);
-        updateDom(res);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-}
-
 // Load all posts and populate document
 function listAllPosts() {
   fetch ('http://thesi.generalassemb.ly:8080/post/list', {
@@ -103,7 +51,7 @@ function listAllPosts() {
   .then(function(result) {
   console.log(result.json());
   })
-}
+};
 
 
 function populatePosts(data) {
@@ -158,7 +106,6 @@ function manipulateDomPosts(title, content, user) {
 };
 
 // Allow a user to view comments on other posts.
-// Allow a user to create and delete their own comments.
 
 // Allow a user to update their profile information.
 // update Profile appears when clicked in drop-down menu
@@ -191,6 +138,47 @@ function updateProfile(event) {
   })
 }
 
+// Allow a user to create and delete their own comments.
+function createComment(event) {
+  event.preventDefault();
+  let comment = document.querySelector('.newComment');
+  fetch('http://thesi.generalassemb.ly:8080/comment/3', {
+    method: 'POST',
+    headers: {
+            "Authorization": "Bearer " + localStorage.getItem('user'),
+            "Content-Type": "application/json"
+        },
+    body: JSON.stringify({
+      text: comment.value
+    })
+  })
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err)=> {
+    console.log(err);
+  })
+};
+
+/*
+----------POST Requests
+create comment
+create post
+create profile
+login
+signup
+update profile
+----------GET Requests
+get comments by Post id
+get comments by User
+get posts by User
+get profile
+signup
+----------Delete Requests
+delete comment by commentId
+delete post by Post Id
+
+*/
 // Use JavaScript for DOM manipulation.
 // Show user-friendly messages in case any errors occur.
 
