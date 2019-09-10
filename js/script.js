@@ -159,11 +159,37 @@ function manipulateDomPosts(title, content, user) {
 
 // Allow a user to view comments on other posts.
 // Allow a user to create and delete their own comments.
+
 // Allow a user to update their profile information.
+// update Profile appears when clicked in drop-down menu
 function displayUpdateProfile(event) {
   event.preventDefault();
   document.querySelector('.updateProfile').style.display = 'block';
 }
+
+// Request to update Profile
+function updateProfile(event) {
+  event.preventDefault();
+
+  let mobile = document.querySelector('.mobile');
+  fetch('http://thesi.generalassemb.ly:8080/profile', {
+    method: 'POST',
+    headers: {
+            "Authorization": "Bearer " + localStorage.getItem('user'),
+            "Content-Type": "application/json"
+        },
+    body: JSON.stringify({
+      mobile: mobile.value
+    })
+  })
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
 // Use JavaScript for DOM manipulation.
 // Show user-friendly messages in case any errors occur.
 
