@@ -1,6 +1,5 @@
 
 console.log("hello world");
-let token;
 function displaySignUp() {
   document.querySelector('.signup').addEventListener('click', function() {
     document.querySelector('#signUpForm').style.display = 'block';
@@ -10,16 +9,18 @@ function displaySignUp() {
 displaySignUp();
 
 function userSignUp() {
-  document.querySelector('#signUpSubmit').addEventListener('click', function() {
+  document.querySelector('.signUpSubmit').addEventListener('click', function(e) {
+    e.preventDefault();
     let email = document.querySelector('#signUpEmail').value;
-      let username = document.querySelector('#signUpUsername').value;
+    let username = document.querySelector('#signUpUsername').value;
     let password = document.querySelector('#signUpPassword').value;
     postData(email, username, password);
-  })
+  });
 }
 
+userSignUp();
 
-let data;
+let token;
 function postData(email, username, password) {
   fetch('http://thesi.generalassemb.ly:8080/signup', {
     method: 'POST',
@@ -32,12 +33,11 @@ function postData(email, username, password) {
       password : `${password}`
     })
   })
-  .then((res) => {
-    console.log(res);
-    data = res;
-    // res.json().then(function(result) {
-    //   token = result.token;
-    // });
+  .then(function(response) {
+    return response.json();
+  }).then(function(data) {
+    console.log(data);
+    token = data["token"];
   })
   .catch((error) => {
     console.log(error);
