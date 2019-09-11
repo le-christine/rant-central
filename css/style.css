@@ -52,6 +52,10 @@ body {
   font-size: 50px;
   text-shadow: 5px 2px 5px #000000;
   width: 100%;
+  /* padding-top: 30px; */
+
+
+
 }
 
 
@@ -90,12 +94,12 @@ body {
   text-shadow: 5px 2px 5px white;
   letter-spacing: 2px;
   animation-duration: 2s;
-  animation-name: bounceIn
+  animation-name: bounceIn;
 }
 
 @keyframes bounceIn {
   0% {
-    transform: scale(5);
+    transform: scale(3);
   }
   100% {
     transform: scale(1);
@@ -124,7 +128,7 @@ body {
   weight: 700;
 }
 
-/* top nav bar styling */
+/* navbar styling */
 .mainNav{
   overflow: hidden;
   background-color: lightgray;
@@ -199,15 +203,11 @@ body {
   top: 25%;
   right: 10px;
   background: black;
-  overflow-x: hidden;
+  overflow-x: auto;
   padding: 20px 0;
   margin-top: 30px;
 }
 
-.sidenav>p {
-  color: white;
-  text-align: center;
-}
 
 .loginForm {
   position: relative;
@@ -272,11 +272,6 @@ body {
     font-size: 18px;
 }
 
-.myProfile {
-  background-color: black;
-  color: white;
-  text-align: center;
-}
 .posts {
   display: flex;
   flex-direction: column-reverse;

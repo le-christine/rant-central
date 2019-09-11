@@ -194,6 +194,33 @@ function showProfile(res) {
   sidenav.append(usersProfile);
 }
 
+// view comments function
+
+function viewUser() {
+  fetch("http://thesi.generalassemb.ly:8080/user/comment", {
+    method: 'GET',
+    headers: {
+          "Authorization": "Bearer " + localStorage.getItem('user'),
+          "Content-Type": "application/json"
+
+
+  .then((res) => {
+   const viewComments = document.querySelector('div')
+    for(let i = 0; i < res.length; i++) {
+    let userComment = res[i];
+    let p = document.createElement('p');
+    p.innerText = userComment;
+    viewComments.appendChild(p) - create a p tag
+
+    }
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+  }
+
+}
+
 
 // Load all posts and populate document
 function listAllPosts() {
@@ -405,18 +432,19 @@ function loginUser() {
 /* TODO */
 function userLog(email, password) {
   fetch('http://thesi.generalassemb.ly:8080/login', {
-    method: 'POST',
-    header: {
-      'Content-Type' : 'application/json'
+    method: 'Post',
+    headers: {
+      'Content-type':'application/json'
     },
-    body: JSON.stringify({
-        email: email,
-        password: password
-    })
+    body:JSON.stringify({
+                  email: email,
+                  password: password
+              })
   })
-  .then((res) => {
-    return res.json();
-    window.location.href="main.html"
+  .then(function(response) {
+    return response.json();
+  }).then(function(data) {
+    location.href="main.html";
   })
   .catch((error) => {
     console.log(error);
