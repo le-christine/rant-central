@@ -102,7 +102,7 @@ body {
   }
 }
 
-.userPostContent, .userOwner{
+.userPostContent, .userOwner, .makeComment{
   margin: 2%;
 }
 

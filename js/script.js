@@ -238,10 +238,22 @@ function populatePosts(title, content, id, owner) {
   let commentsBox = document.createElement('div');
   commentsBox.classList = "userPostComments";
 
-  let deleteBtn;
   // creates a delete button
+  let deleteBtn;
 
-  // a user's post
+  // creates a comment form
+  makeCommentHeader = document.createElement('h4');
+  makeCommentHeader.innerText = 'Make a comment:';
+  let commentInput = document.createElement('input');
+  commentInput.type = "text";
+  commentInput.classList = "commentInput";
+  let commentSubmit = document.createElement('input');
+  commentSubmit.type = "submit";
+  commentSubmit.addEventListener('click', function() {
+    event.preventDefault();
+    console.log(event.target.parentNode);
+  });
+
   // if it is the user's post it has a delete option
   if (owner === localStorage.getItem('username')) {
     deleteBtn = document.createElement('i');
@@ -250,10 +262,8 @@ function populatePosts(title, content, id, owner) {
     deleteBtn.onclick = "deletePost(event)";
     userPost.append(deleteBtn);
   }
-  userPost.append(postTitle);
-  userPost.append(userOwner);
-  userPost.append(postContent);
-  userPost.append(commentsBox);
+  userPost.append(postTitle, userOwner, postContent, commentsBox, makeCommentHeader,
+  commentInput,commentSubmit);
 }
 
 
@@ -265,30 +275,54 @@ function manipulateDomPosts(title, content, id) {
     userPost.setAttribute('postId', id);
     document.querySelector(".posts").appendChild(userPost);
 
-    // creates a post title and appends it to the post
+    // creates a post title
     let postTitle = document.createElement('h3');
     postTitle.classList = 'userPostTitle';
     postTitle.innerText = title;
 
-    // creates a div with post's contents and appends it to the post
+    // creates a div with post's contents
     let postContent = document.createElement('p');
     postContent.classList = 'userPostContent';
     postContent.innerText = content;
 
-    // creates a comment box and appends it to the post
+    // creates div for comments
     let commentsBox = document.createElement('div');
     commentsBox.classList = "userPostComments";
+
+    // creates a comment form
+    let makeComment = document.createElement('div');
+    makeComment.classList = 'makeComment';
+    makeComment.addEventListener('click', function() {
+      event.preventDefault();
+      console.log(event.target.parentNode.parentNode);
+    });
+    makeComment.classList = "makeComment";
+    makeCommentHeader = document.createElement('h4');
+    makeCommentHeader.innerText = 'Make a comment:';
+    let commentInput = document.createElement('input');
+    commentInput.type = "text";
+    commentInput.classList = "commentInput";
+    let commentSubmit = document.createElement('input');
+    commentSubmit.type = "submit";
+    makeComment.append(makeCommentHeader,
+                            commentInput,
+                            commentSubmit);
+
 
     // creates a delete button
     let deleteBtn = document.createElement('i');
     deleteBtn.classList = "fa fa-times";
     deleteBtn.id = "deletePost";
     deleteBtn.onclick = "deletePost(event)";
-    // a user's post
-    userPost.append(deleteBtn);
-    userPost.append(postTitle);
-    userPost.append(postContent);
-    userPost.append(commentsBox);
+
+    // appends all new elements
+    // userPost.append(deleteBtn);
+    // userPost.append(postTitle);
+    // userPost.append(postContent);
+    // userPost.append(commentsBox);
+    // userPost.append(makeComment);
+    userPost.append(postTitle, userOwner, postContent, commentsBox, makeCommentHeader,
+    commentInput,commentSubmit);
 }
 
 // Allow a user to make a post, upon successful POST updateDOM function is called
@@ -325,6 +359,11 @@ function updateProfile(event) {
   })
 
 };
+// Allow a user to make a comment on a post
+function makeComment(event) {
+  event.preventDefault();
+  console.log(event.target.parentNode);
+}
 
 // Allow a user to view comments on other posts.
 
