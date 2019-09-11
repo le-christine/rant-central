@@ -138,6 +138,7 @@ function updateProfile(event) {
   })
 };
 
+
 // Allow a user to create and delete their own comments.
 /*
 function deletePost(event) {
@@ -167,6 +168,76 @@ function createComment(event) {
 };
 */
 
+/*
+----------POST Requests
+create comment
+create post
+create profile
+login
+signup
+update profile
+----------GET Requests
+get comments by Post id
+get comments by User
+get posts by User
+get profile
+signup
+----------Delete Requests
+delete comment by commentId
+delete post by Post Id
+
+*/
+// Use JavaScript for DOM manipulation.
+// Show user-friendly messages in case any errors occur.
+
+
+
+
+
+
+
+
+
+
+
+  //R.H.
+  // login to rant
+
+function displayLoginIn(event) {
+  event.preventDefault();
+  document.querySelector('.loginForm').style.display = 'block';
+}
+
+function loginUser() {
+    e.preventDefault();
+    let email = document.querySelector('#loginEmail').value;
+    let password = document.querySelector('#loginPassword').value;
+    userLog(email, password);
+}
+
+
+function userLog(email, password) {
+  fetch('http://thesi.generalassemb.ly:8080/login', {
+  method: 'Post',
+  headers: {
+    'Content-type':'application/json'
+  },
+  body:JSON.stringify({
+                email: email,
+                password: password
+            })
+        })
+        .then(function(response) {
+          return response.json();
+        }).then(function(data) {
+          location.href="main.html";
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+      };
+
+// Allow a user to make a post
 function makePost(event) {
   event.preventDefault();
   let title = document.querySelector('.titlePost');
@@ -191,6 +262,8 @@ function makePost(event) {
   })
 }
 
+// The post loads in the DOM 
+
 
 function updateDom(res) {
     fetch("http://thesi.generalassemb.ly:8080/user/post", {
@@ -211,61 +284,3 @@ function updateDom(res) {
         console.log(err);
     })
 }
-/*
-----------POST Requests
-create comment
-create post
-create profile
-login
-signup
-update profile
-----------GET Requests
-get comments by Post id
-get comments by User
-get posts by User
-get profile
-signup
-----------Delete Requests
-delete comment by commentId
-delete post by Post Id
-
-*/
-// Use JavaScript for DOM manipulation.
-// Show user-friendly messages in case any errors occur.
-
-
-  // login to rant
-
-function displayLoginIn(event) {
-  event.preventDefault();
-  document.querySelector('.loginForm').style.display = 'block';
-}
-
-function loginUser() {
-    e.preventDefault();
-    let email = document.querySelector('#loginEmail').value;
-    let password = document.querySelector('#loginPassword').value;
-    userLog(email, password);
-  }
-
-
-function userLog(email, password) {
-  fetch('http://thesi.generalassemb.ly:8080/login', {
-  method: 'Post',
-  headers: {
-    'Content-type':'application/json'
-  },
-  body:JSON.stringify({
-                email: email,
-                password: password
-            })
-        })
-        .then(function(response) {
-          return response.json();
-        }).then(function(data) {
-          location.href="main.html";
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-      };

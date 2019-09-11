@@ -17,7 +17,7 @@
 
   <a class="loginRant" onclick="displayLoginIn(event)">Login</a>
   <a class="signup" onclick="displaySignUp(event)">Sign-Up</a>
-
+    
 </div>
 
 <div>
@@ -25,11 +25,14 @@
   <p class="rant-quote">“The best and most beautiful things in the world cannot be seen or even touched.
     They must be felt with the a rant”.</p>
 </div>
+<div class="footer">
+  <p>By Ramel Haines and Christine Le</p>
+</div>
 
 <!-- log in form  -->
 
 <div class="loginForm">
-    <form onSubmit="postData(event)">
+    <form onSubmit="userLog(event)">
     <input
       id="loginEmail"
       type="email"
@@ -44,10 +47,11 @@
 </div>
 
 <!-- sign up form  -->
-  <form id ="signUpForm" onSubmit="postData(event)">
 
-    <br/>
-    <h3> Sign up for Rant Central</h3><br/>
+<div id="signUpForm">
+  <br/>
+  <h3> Sign up for Rant Central</h3><br/>
+  <form onSubmit="postData(event)">
     email:
     <input id="signUpEmail" type="email" placeholder="Email address"/><br/></br>
     username:
@@ -56,6 +60,8 @@
     <input id ="signUpPassword" type="password"/></br></br>
     <input class="signUpSubmit" type="submit"/>
   </form>
+</div>
+
 
 <footer class="footer">
   <p>By Ramel Haines and Christine Le</p>
