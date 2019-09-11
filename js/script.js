@@ -80,8 +80,8 @@ function createProfile(event) {
     })
   })
   .then((res) =>{
-    console.log(res);
     alert('You have successfully created a profile');
+    displayProfile();
   })
   .catch((error) => {
   console.log(error)
@@ -162,8 +162,37 @@ function updateDom(res) {
  */
 
 // Get profile and load the DOM with the response data
-function displayProfile(event) {
-  event.preventDefault();
+function displayProfile() {
+  fetch('http://thesi.generalassemb.ly:8080/profile', {
+    method: 'GET',
+    headers: {
+            "Authorization": "Bearer " + localStorage.getItem('user'),
+            "Content-Type": "application/json"
+        }
+  })
+  .then((res) => {
+    return(res.json());
+  })
+  .then((res) => {
+    showProfile(res);
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+}
+
+function showProfile(res) {
+  let sidenav = document.querySelector('.sidenav');
+  let usersProfile = document.createElement('div');
+  usersProfile.classList = 'myProfile';
+  usersProfile.innerText = `\n\nWelcome, ${res.user.username}!\n
+                            Additional email address:\n
+                            ${res.additionalEmail}\n
+                            Mobile: \n
+                            ${res.mobile}\n
+                            Address: \n
+                            ${res.address}`;
+  sidenav.append(usersProfile);
 }
 
 

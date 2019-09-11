@@ -239,6 +239,11 @@ body {
     font-size: 18px;
 }
 
+.myProfile {
+  background-color: black;
+  color: white;
+  text-align: center;
+}
 .posts {
   display: flex;
   flex-direction: column-reverse;
