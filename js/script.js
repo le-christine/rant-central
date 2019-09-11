@@ -107,6 +107,25 @@ function manipulateDomPosts(title, content) {
 
 // Allow a user to view comments on other posts.
 
+function makePost(event) {
+event.preventDefault();
+let titlePost = document.querySelector('.titlepost').value;
+let titledescription = document.querySelector('.titledescription').value;
+
+fetch("http://thesi.generalassemb.ly:8080/post",{
+  method: 'POST',
+  header: {
+    "Content-Type":"application/json",
+    "Authorization": "Bearer " + localStorage.getItem('user')
+  },
+
+  body: JSON.stringify ({
+      title: titlePost,
+      description: titledescription
+    })
+})
+.then((res) => {
+  console.log(res);
 /* Allow a user to update their profile information.*/
 // update Profile appears when clicked in drop-down menu
 function displayUpdateProfile(event) {
@@ -136,6 +155,7 @@ function updateProfile(event) {
   .catch((err) => {
     console.log(err);
   })
+
 };
 
 
@@ -166,9 +186,9 @@ function createComment(event) {
     console.log(err);
   })
 };
-*/
 
-/*
+
+
 ----------POST Requests
 create comment
 create post
@@ -199,11 +219,11 @@ delete post by Post Id
 
 
 
-
   //R.H.
+
   // login to rant
 
-function displayLoginIn(event) {
+function displayLogIn(event) {
   event.preventDefault();
   document.querySelector('.loginForm').style.display = 'block';
 }
@@ -213,7 +233,7 @@ function loginUser() {
     let email = document.querySelector('#loginEmail').value;
     let password = document.querySelector('#loginPassword').value;
     userLog(email, password);
-}
+  }
 
 
 function userLog(email, password) {
@@ -262,25 +282,23 @@ function makePost(event) {
   })
 }
 
-// The post loads in the DOM 
-
-
+// The post loads in the DOM
 function updateDom(res) {
-    fetch("http://thesi.generalassemb.ly:8080/user/post", {
-        headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user')
-        }
-    })
-    .then((res) => {
-        return res.json();
-    })
-    .then((res) => {
-        const list = document.querySelector('.posts');
-        for (let i = 0; i < res.length; i++) {
-            manipulateDomPosts(res[i].title, res[i].description)
-        }
-    })
-    .catch((err) => {
-        console.log(err);
-    })
+   fetch("http://thesi.generalassemb.ly:8080/user/post", {
+       headers: {
+           "Authorization": "Bearer " + localStorage.getItem('user')
+       }
+   })
+   .then((res) => {
+       return res.json();
+   })
+   .then((res) => {
+       const list = document.querySelector('.posts');
+       for (let i = 0; i < res.length; i++) {
+           manipulateDomPosts(res[i].title, res[i].description)
+       }
+   })
+   .catch((err) => {
+       console.log(err);
+   })
 }
