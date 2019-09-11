@@ -195,6 +195,33 @@ function showProfile(res) {
   sidenav.append(usersProfile);
 }
 
+// view comments function
+
+function viewUser() {
+  fetch("http://thesi.generalassemb.ly:8080/user/comment", {
+    method: 'GET',
+    headers: {
+          "Authorization": "Bearer " + localStorage.getItem('user'),
+          "Content-Type": "application/json"
+
+
+  .then((res) => {
+   const viewComments = document.querySelector('div')
+    for(let i = 0; i < res.length; i++) {
+    let userComment = res[i];
+    let p = document.createElement('p');
+    p.innerText = userComment;
+    viewComments.appendChild(p) - create a p tag
+
+    }
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+  }
+
+}
+
 
 // Load all posts and populate document
 function listAllPosts() {
@@ -260,51 +287,7 @@ function manipulateDomPosts(title, content) {
 
 };
 
-// Allow a user to make a post, upon successful POST updateDOM function is called
-function makePost(event) {
-  event.preventDefault();
-  let title = document.querySelector('.titlePost');
-  let titleDescription = document.querySelector('.titleDescription');
 
-  fetch('http://thesi.generalassemb.ly:8080/post', {
-    method: 'POST',
-    headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user'),
-            "Content-Type": "application/json"
-        },
-    body: JSON.stringify({
-            title: title.value,
-            description: titleDescription.value
-          })
-  })
-  .then((res) => {
-    updateDom(res)
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-}
-
-// The post loads in the DOM
-function updateDom(res) {
-    fetch("http://thesi.generalassemb.ly:8080/user/post", {
-        headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user')
-        }
-    })
-    .then((res) => {
-        return res.json();
-    })
-    .then((res) => {
-        const list = document.querySelector('.posts');
-        for (let i = 0; i < res.length; i++) {
-            manipulateDomPosts(res[i].title, res[i].description)
-        }
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-}
 /* Allow a user to update their profile information.*/
 // update Profile appears when clicked in drop-down menu
 function displayUpdateProfile(event) {
@@ -409,18 +392,19 @@ function loginUser() {
 
 function userLog(email, password) {
   fetch('http://thesi.generalassemb.ly:8080/login', {
-    method: 'POST',
-    header: {
-      'Content-Type' : 'application/json'
+    method: 'Post',
+    headers: {
+      'Content-type':'application/json'
     },
-    body: JSON.stringify({
-        email: email,
-        password: password
-    })
+    body:JSON.stringify({
+                  email: email,
+                  password: password
+              })
   })
-  .then((res) => {
-    return res.json();
-    window.location.href="main.html"
+  .then(function(response) {
+    return response.json();
+  }).then(function(data) {
+    location.href="main.html";
   })
   .catch((error) => {
     console.log(error);
