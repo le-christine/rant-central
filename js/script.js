@@ -314,13 +314,6 @@ function manipulateDomPosts(title, content, id) {
     deleteBtn.classList = "fa fa-times";
     deleteBtn.id = "deletePost";
     deleteBtn.onclick = "deletePost(event)";
-
-    // appends all new elements
-    // userPost.append(deleteBtn);
-    // userPost.append(postTitle);
-    // userPost.append(postContent);
-    // userPost.append(commentsBox);
-    // userPost.append(makeComment);
     userPost.append(postTitle, userOwner, postContent, commentsBox, makeCommentHeader,
     commentInput,commentSubmit);
 }
