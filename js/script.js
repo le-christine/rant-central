@@ -158,13 +158,52 @@ function manipulateDomPosts(title, content, user) {
 };
 
 // Allow a user to view comments on other posts.
+
+function makePost(event) {
+event.preventDefault();
+let titlePost = document.querySelector('.titlepost').value;
+let titledescription = document.querySelector('.titledescription').value;
+
+fetch("http://thesi.generalassemb.ly:8080/post",{
+  method: 'POST',
+  header: {
+    "Content-Type":"application/json",
+    "Authorization": "Bearer " + localStorage.getItem('user')
+  },
+
+  body: JSON.stringify ({
+      title: titlePost,
+      description: titledescription
+    })
+})
+.then((res) => {
+  console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+
+
+
+
 // Allow a user to create and delete their own comments.
 // Allow a user to update their profile information.
 // Use JavaScript for DOM manipulation.
 // Show user-friendly messages in case any errors occur.
 
-  
-  
+
+
+
+
+
+
+
+
+
+
+
   //R.H.
   // login to rant
 
@@ -177,20 +216,19 @@ function displayLoginIn() {
 displayLoginIn();
 
 function loginUser() {
-  document.querySelector(".rantAway").addEventListener('click', function(e) {
+  document.querySelector('.rantAway').addEventListener('click', function(e) {
     e.preventDefault();
-    console.log('test')
     let email = document.querySelector('#loginEmail').value;
     let password = document.querySelector('#loginPassword').value;
     console.log(email, password)
-    postData(email, password);
+    userLog(email, password);
   });
   }
 
 loginUser();
 
 
-function postData(email, password) {
+function userLog(email, password) {
   fetch('http://thesi.generalassemb.ly:8080/login', {
   method: 'Post',
   headers: {
@@ -209,5 +247,4 @@ function postData(email, password) {
         .catch((error) => {
           console.log(error);
         })
-      }
-};
+      };

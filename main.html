@@ -35,10 +35,10 @@
     <h3>Want to rant?</h3>
     <div class="newRant">
       <!-- add a class so you can use DOM -->
-    <input type="text" placeholder="title"/>
+    <input class="titlepost" type="text" placeholder="title"/>
     <!-- add a class so you can use DOM -->
-    <input type="text" placeholder="description"/>
-    <input class="submitRant" type="submit"/>
+    <input class="titledescription" type="text" placeholder="description"/>
+    <input class="submitRant" onclick = "makePost(event)" type="submit"/>
     </div>
 
   <!-- a post -->
@@ -66,13 +66,13 @@
     </div>
 <!-- Side Navigation  -->
 
-<div class="sidenav">
+<!-- <div class="sidenav">
 <a href="#">Sports</a>
 <a href="#">News</a>
 <a href="#">Health</a>
 <a href="#">Fashion</a>
 <a href="#">Technology</a>
-</div>
+</div> -->
 <script src="js/script.js"></script>
   </body>
 </html>
