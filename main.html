@@ -20,7 +20,7 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a onclick="displayUpdateProfile(event)">Update</a>
+          <a href="#">Update</a>
           <a href="#">Log Out</a>
         </div>
       </div>
@@ -32,13 +32,16 @@
     <h4>Posts</h4>
 
     <!-- make new post -->
-    <h3>Want to rant?</h3>
+    <h3 class="rantTitle">Rant Away!</h3>
     <div class="newRant">
-    <input class="titlePost" type="text" placeholder="title"/>
-    <input class="titleDescription" type="text" placeholder="description"/>
-    <input onclick = "makePost(event)" class="submitRant" type="submit"/>
+      <!-- add a class so you can use DOM -->
+    <input class="titlepost" type="text" placeholder="title"/>
+    <!-- add a class so you can use DOM -->
+    <input class="titledescription" type="text" placeholder="description"/>
+    <input class="submitRant" onclick = "makePost(event)" type="submit"/>
     </div>
 
+      
     <div class="posts">
 
   <!-- a post -->
@@ -47,26 +50,21 @@
         <h3 class = "userPostTitle">Title</h3>
         <p class = "userPostContent">Content</p>
         <div class = "userPostComents">
-          <form onSubmit="createComment(event)" class="enterComments">
-            <h4>Comments</h4>
-            <p> Enter a comment: </p>
-            <input class="newComment" type="text"/>
-            <input type="submit"/>
-          </form>
+          <h4></h4>
         </div>
       </div>
-    </div>
+      
       <!-- Template of user post
 
-        <div class="userPost">
-          <h3 class = "userPostTitle"></h3>
-          <p class = "userPostContent"></p>
-          <div class = "userPostComents">
-            <h4></h4>
-          </div>
-      </div>
 
-    -->
+      <div class="sidenav">
+        <form class="makeUserProfile" onsubmit="createProfile(event)">
+          <input type="text" placeholder="Additional Email" class="addtEmail"/>
+          <input type="text" placeholder="Mobile" class="mobile"/>
+          <input type="text" placeholder="Address" class="address"/>
+          <input type="submit" class="submitCreateProfile"/>
+        </form>
+      </div>
 
     </div>
 
@@ -91,6 +89,7 @@
     <input type="submit"/>
   </form>
 </div>
+
 
 <script src="js/script.js"></script>
   </body>
