@@ -107,7 +107,6 @@ function manipulateDomPosts(title, content) {
 
 // Allow a user to view comments on other posts.
 
-<<<<<<< HEAD
 function makePost(event) {
 event.preventDefault();
 let titlePost = document.querySelector('.titlepost').value;
@@ -127,7 +126,6 @@ fetch("http://thesi.generalassemb.ly:8080/post",{
 })
 .then((res) => {
   console.log(res);
-=======
 /* Allow a user to update their profile information.*/
 // update Profile appears when clicked in drop-down menu
 function displayUpdateProfile(event) {
@@ -153,20 +151,13 @@ function updateProfile(event) {
   .then((res) => {
     console.log(res);
     alert('Your profile has been successfully updated.');
->>>>>>> 1e037c5cfbb99c67f4915b0b2b13e78c0d36aa6e
   })
   .catch((err) => {
     console.log(err);
   })
-<<<<<<< HEAD
-}
 
-
-
-
-=======
 };
->>>>>>> 1e037c5cfbb99c67f4915b0b2b13e78c0d36aa6e
+
 
 // Allow a user to create and delete their own comments.
 /*
@@ -197,6 +188,81 @@ function createComment(event) {
 };
 */
 
+/*
+----------POST Requests
+create comment
+create post
+create profile
+login
+signup
+update profile
+----------GET Requests
+get comments by Post id
+get comments by User
+get posts by User
+get profile
+signup
+----------Delete Requests
+delete comment by commentId
+delete post by Post Id
+
+*/
+// Use JavaScript for DOM manipulation.
+// Show user-friendly messages in case any errors occur.
+
+
+
+
+
+
+
+
+
+
+  //R.H.
+
+  // login to rant
+
+function displayLoginIn(event) {
+  event.preventDefault();
+  document.querySelector('.loginForm').style.display = 'block';
+}
+
+function loginUser() {
+
+  document.querySelector('.rantAway').addEventListener('click', function(e) {
+    e.preventDefault();
+    let email = document.querySelector('#loginEmail').value;
+    let password = document.querySelector('#loginPassword').value;
+    userLog(email, password);
+  });
+  }
+
+})
+
+
+function userLog(email, password) {
+  fetch('http://thesi.generalassemb.ly:8080/login', {
+  method: 'Post',
+  headers: {
+    'Content-type':'application/json'
+  },
+  body:JSON.stringify({
+                email: email,
+                password: password
+            })
+        })
+        .then(function(response) {
+          return response.json();
+        }).then(function(data) {
+          location.href="main.html";
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+      };
+
+// Allow a user to make a post
 function makePost(event) {
   event.preventDefault();
   let title = document.querySelector('.titlePost');
@@ -221,6 +287,8 @@ function makePost(event) {
   })
 }
 
+// The post loads in the DOM
+
 
 function updateDom(res) {
     fetch("http://thesi.generalassemb.ly:8080/user/post", {
@@ -241,85 +309,3 @@ function updateDom(res) {
         console.log(err);
     })
 }
-/*
-----------POST Requests
-create comment
-create post
-create profile
-login
-signup
-update profile
-----------GET Requests
-get comments by Post id
-get comments by User
-get posts by User
-get profile
-signup
-----------Delete Requests
-delete comment by commentId
-delete post by Post Id
-
-*/
-// Use JavaScript for DOM manipulation.
-// Show user-friendly messages in case any errors occur.
-
-
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-  //R.H.
-=======
->>>>>>> 1e037c5cfbb99c67f4915b0b2b13e78c0d36aa6e
-  // login to rant
-
-function displayLoginIn(event) {
-  event.preventDefault();
-  document.querySelector('.loginForm').style.display = 'block';
-}
-
-function loginUser() {
-<<<<<<< HEAD
-  document.querySelector('.rantAway').addEventListener('click', function(e) {
-    e.preventDefault();
-    let email = document.querySelector('#loginEmail').value;
-    let password = document.querySelector('#loginPassword').value;
-    console.log(email, password)
-    userLog(email, password);
-  });
-=======
-    e.preventDefault();
-    let email = document.querySelector('#loginEmail').value;
-    let password = document.querySelector('#loginPassword').value;
-    userLog(email, password);
->>>>>>> 1e037c5cfbb99c67f4915b0b2b13e78c0d36aa6e
-  }
-
-
-function userLog(email, password) {
-  fetch('http://thesi.generalassemb.ly:8080/login', {
-  method: 'Post',
-  headers: {
-    'Content-type':'application/json'
-  },
-  body:JSON.stringify({
-                email: email,
-                password: password
-            })
-        })
-        .then(function(response) {
-          return response.json();
-        }).then(function(data) {
-          location.href="main.html";
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-      };
