@@ -156,7 +156,7 @@ body {
 }
 
 /* side bar styling */
-.sidenav {
+/* .sidenav {
   width: 25%;
   height: 80%;
   position:fixed;
@@ -183,7 +183,11 @@ body {
 
 .sidenav a:hover {
   color: white;
+<<<<<<< HEAD
 }
+=======
+} */
+>>>>>>> 1e037c5cfbb99c67f4915b0b2b13e78c0d36aa6e
 
 
 .loginForm {
@@ -231,4 +235,31 @@ body {
   border-radius: 10%;
   text-align: center;
   display: none;
+}
+
+.updateProfile {
+  position: fixed;
+  top:20%;
+  left: 40%;
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  border-radius: 10%;
+  text-align: center;
+  display: none;
+}
+
+.updateProfile>h2 {
+    font-size: 18px;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+#deletePost{
+  font-size: 30px;
+  margin-left: 0px;
+  float: right;
 }
