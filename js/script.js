@@ -149,7 +149,7 @@ function updateDom(res) {
     })
     .then((res) => {
         for (let i = 0; i < res.length; i++) {
-          manipulateDomPosts(res[i].title, res[i].description, res[i].id, res[i].user.username);
+          populatePosts(res[i].title, res[i].description, res[i].id, res[i].user.username);
         }
     })
     .catch((err) => {
@@ -251,7 +251,7 @@ function populatePosts(title, content, id, owner) {
   commentSubmit.type = "submit";
   commentSubmit.addEventListener('click', function() {
     event.preventDefault();
-    console.log(event.target.parentNode);
+    makeComment(event.target.parentNode);
   });
 
   // if it is the user's post it has a delete option
@@ -264,58 +264,6 @@ function populatePosts(title, content, id, owner) {
   }
   userPost.append(postTitle, userOwner, postContent, commentsBox, makeCommentHeader,
   commentInput,commentSubmit);
-}
-
-
-
-function manipulateDomPosts(title, content, id) {
-    // creates a div for each post and appends it to posts-container
-    let userPost = document.createElement('div');
-    userPost.classList = 'userPost';
-    userPost.setAttribute('postId', id);
-    document.querySelector(".posts").appendChild(userPost);
-
-    // creates a post title
-    let postTitle = document.createElement('h3');
-    postTitle.classList = 'userPostTitle';
-    postTitle.innerText = title;
-
-    // creates a div with post's contents
-    let postContent = document.createElement('p');
-    postContent.classList = 'userPostContent';
-    postContent.innerText = content;
-
-    // creates div for comments
-    let commentsBox = document.createElement('div');
-    commentsBox.classList = "userPostComments";
-
-    // creates a comment form
-    let makeComment = document.createElement('div');
-    makeComment.classList = 'makeComment';
-    makeComment.addEventListener('click', function() {
-      event.preventDefault();
-      console.log(event.target.parentNode.parentNode);
-    });
-    makeComment.classList = "makeComment";
-    makeCommentHeader = document.createElement('h4');
-    makeCommentHeader.innerText = 'Make a comment:';
-    let commentInput = document.createElement('input');
-    commentInput.type = "text";
-    commentInput.classList = "commentInput";
-    let commentSubmit = document.createElement('input');
-    commentSubmit.type = "submit";
-    makeComment.append(makeCommentHeader,
-                            commentInput,
-                            commentSubmit);
-
-
-    // creates a delete button
-    let deleteBtn = document.createElement('i');
-    deleteBtn.classList = "fa fa-times";
-    deleteBtn.id = "deletePost";
-    deleteBtn.onclick = "deletePost(event)";
-    userPost.append(postTitle, userOwner, postContent, commentsBox, makeCommentHeader,
-    commentInput,commentSubmit);
 }
 
 // Allow a user to make a post, upon successful POST updateDOM function is called
@@ -353,9 +301,37 @@ function updateProfile(event) {
 
 };
 // Allow a user to make a comment on a post
-function makeComment(event) {
-  event.preventDefault();
-  console.log(event.target.parentNode);
+// function passes a postId
+function makeComment(postId) {
+  let commentParent = document.querySelector(`[postid="${postId}"]`);
+  let commentToPost = commentParent.querySelector('.commentInput');
+  fetch(`http://thesi.generalassemb.ly:8080/comment/${postId}`, {
+    method: 'POST',
+    headers: {
+            "Authorization": "Bearer " + localStorage.getItem('user'),
+            "Content-Type": "application/json"
+        },
+    body: JSON.stringify({
+          text: commentToPost.value
+      })
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  // grab the comment innerText by getting document selector : div with postid = postId,
+  //let test = document.querySelector('[postid="id"]');
+  //test.querySelector('commentInput').value;
+  // fetch with the url, pass postId
+
+  // call the GET comments function
+  // go through res loop
+  // manipulate comments -- > append to #userPostsComments in the userPost with the post ID
+  //console.log(event.target.parentNode);
+
+
 }
 
 // Allow a user to view comments on other posts.

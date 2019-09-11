@@ -112,8 +112,10 @@ body {
   margin: 2%;
 }
 
-.userPostComents{
+.userPostComments{
   margin: 2%;
+  height: 100px;
+  background-color: white;
 }
 
 .userPostComents>h4{
