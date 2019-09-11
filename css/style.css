@@ -170,19 +170,9 @@ body {
   margin-top: 30px;
 }
 
-.sidenav a {
-  padding: 15px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #CD5C5C;
-  display: block;
-  text-align: center;
-  font-family: "Permanent Marker", sans-serif;
-
-}
-
-.sidenav a:hover {
+.sidenav>p {
   color: white;
+  text-align: center;
 }
 
 

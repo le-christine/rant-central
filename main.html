@@ -40,10 +40,10 @@
     </div>
 
     <div class="posts">
+
   <!-- a post -->
       <div class="userPost">
         <i onclick="deletePost(event)" id="deletePost" class="fa fa-times"></i>
-        <p>Posted by: <span class="postOwner"></span></p>
         <h3 class = "userPostTitle">Title</h3>
         <p class = "userPostContent">Content</p>
         <div class = "userPostComents">
@@ -55,7 +55,7 @@
           </form>
         </div>
       </div>
-</div>
+    </div>
       <!-- Template of user post
 
         <div class="userPost">
@@ -81,13 +81,17 @@
       </form>
 <!-- Side Navigation  -->
 
-<!-- <div class="sidenav">
-<a href="#">Sports</a>
-<a href="#">News</a>
-<a href="#">Health</a>
-<a href="#">Fashion</a>
-<a href="#">Technology</a>
-</div> -->
+<div class="sidenav">
+  <p>Make your profile!</p>
+  <br/>
+  <form class="makeUserProfile" onsubmit="createProfile(event)">
+    <input type="text" placeholder="Additional Email" class="addtEmail"/>
+    <input type="text" placeholder="Mobile" class="addMobile"/>
+    <input type="text" placeholder="Address" class="address"/>
+    <input type="submit"/>
+  </form>
+</div>
+
 <script src="js/script.js"></script>
   </body>
 </html>
