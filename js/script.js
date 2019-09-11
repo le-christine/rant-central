@@ -206,6 +206,7 @@ function listAllPosts() {
   })
 };
 
+// i want to delete my own posts. to delete, i need
 /*
 function populatePosts(data) {
   let title, content, username;
@@ -255,6 +256,7 @@ function manipulateDomPosts(title, content) {
   userPost.append(postContent);
   userPost.append(commentsBox);
   userPost.append(deleteBtn);
+
 };
 
 // Allow a user to view comments on other posts.
@@ -291,11 +293,11 @@ function createComment(event) {
 /*
 ----------POST Requests
 create comment
-create post
-create profile
-login
-signup
-update profile
+create post /
+create profile /
+login /
+signup /
+update profile /
 ----------GET Requests
 get comments by Post id
 get comments by User
