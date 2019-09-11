@@ -1,13 +1,33 @@
 console.log("hello world");
 
+/**
+ * EVENT HANDLERS
+ */
+
 // When signup button is clicked, form appears
 function displaySignUp(event) {
   event.preventDefault();
   document.querySelector('#signUpForm').style.display = 'block';
 }
 
+// after successul sign up, changes username element
+function changeUser() {
+  document.querySelector('.loggedInUser').innerText = localStorage.getItem('username');
+};
+
+// update Profile appears when clicked in drop-down menu
+function displayUpdateProfile(event) {
+  event.preventDefault();
+  document.querySelector('.updateProfile').style.display = 'block';
+}
+
+/**
+ * POST REQUESTS
+*/
+
 // Signup POST Request
 // after successful request, redirects user to new page
+// TODO: rename this to signup and replace the name in html add a docstring
 function postData(event) {
   event.preventDefault();
   let email = document.querySelector('#signUpEmail');
@@ -30,18 +50,151 @@ function postData(event) {
         return res.json();
     })
     .then((res) => {
+        console.log(res.token);
         localStorage.setItem('user', res.token);
+        window.location.href="./main.html";
     })
   .catch((err) => {
       console.log(err);
   })
-  window.location.href="./main.html";
 }
 
-// after successul sign up, changes username element
-function changeUser() {
-  document.querySelector('.loggedInUser').innerText = localStorage.getItem('username');
-};
+// Request to create profile
+function createProfile(event) {
+  event.preventDefault();
+
+  let addtEmail = document.querySelector('.addtEmail');
+  let mobile = document.querySelector('.addMobile');
+  let address = document.querySelector('.address');
+
+  fetch('http://thesi.generalassemb.ly:8080/profile', {
+    method: 'POST',
+    headers: {
+      "Authorization": "Bearer " + localStorage.getItem('user'),
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        additionalEmail: addtEmail.value,
+        mobile: mobile.value,
+        address: address.value
+    })
+  })
+  .then((res) =>{
+    alert('You have successfully created a profile');
+    displayProfile();
+  })
+  .catch((error) => {
+  console.log(error)
+  })
+}
+
+// Request to update Profile. Upon success, informs user
+function updateProfile(event) {
+  event.preventDefault();
+
+  let mobile = document.querySelector('.mobile');
+  fetch('http://thesi.generalassemb.ly:8080/profile', {
+    method: 'POST',
+    headers: {
+            "Authorization": "Bearer " + localStorage.getItem('user'),
+            "Content-Type": "application/json"
+        },
+    body: JSON.stringify({
+      mobile: mobile.value
+    })
+  })
+  .then((res) => {
+    console.log(res);
+    alert('Your profile has been successfully updated.');
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+// Allow a user to make a post, upon successful POST updateDOM function is called
+function makePost(event) {
+  event.preventDefault();
+  let title = document.querySelector('.titlePost');
+  let titleDescription = document.querySelector('.titleDescription');
+
+  fetch('http://thesi.generalassemb.ly:8080/post', {
+    method: 'POST',
+    headers: {
+            "Authorization": "Bearer " + localStorage.getItem('user'),
+            "Content-Type": "application/json"
+        },
+    body: JSON.stringify({
+            title: title.value,
+            description: titleDescription.value
+          })
+  })
+  .then((res) => {
+    updateDom(res)
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+}
+
+// The post loads in the DOM
+function updateDom(res) {
+    fetch("http://thesi.generalassemb.ly:8080/user/post", {
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem('user')
+        }
+    })
+    .then((res) => {
+        return res.json();
+    })
+    .then((res) => {
+        const list = document.querySelector('.posts');
+        for (let i = 0; i < res.length; i++) {
+            manipulateDomPosts(res[i].title, res[i].description)
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}
+/**
+ * GET REQUESTS
+ */
+
+// Get profile and load the DOM with the response data
+function displayProfile() {
+  fetch('http://thesi.generalassemb.ly:8080/profile', {
+    method: 'GET',
+    headers: {
+            "Authorization": "Bearer " + localStorage.getItem('user'),
+            "Content-Type": "application/json"
+        }
+  })
+  .then((res) => {
+    return(res.json());
+  })
+  .then((res) => {
+    showProfile(res);
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+}
+
+function showProfile(res) {
+  let sidenav = document.querySelector('.sidenav');
+  let usersProfile = document.createElement('div');
+  usersProfile.classList = 'myProfile';
+  usersProfile.innerText = `\n\nWelcome, ${res.user.username}!\n
+                            Additional email address:\n
+                            ${res.additionalEmail}\n
+                            Mobile: \n
+                            ${res.mobile}\n
+                            Address: \n
+                            ${res.address}`;
+  sidenav.append(usersProfile);
+}
+
 
 // Load all posts and populate document
 function listAllPosts() {
@@ -53,6 +206,8 @@ function listAllPosts() {
   })
 };
 
+// wednesday C.L. 
+// i want to delete my own posts. to delete, i need
 /*
 function populatePosts(data) {
   let title, content, username;
@@ -78,31 +233,31 @@ function manipulateDomPosts(title, content) {
   userPost.classList = 'userPost';
   document.querySelector(".posts").appendChild(userPost);
 
-
-  //creates a span for post title and appends it to the post
-  // let postOwner = document.createElement('span');
-  // postOwner.classList = 'postOwner';
-  // postOwner.innerText = `Posted by: ${user}`;
-  // //console.log(postOwner);
-
   // creates a post title and appends it to the post
   let postTitle = document.createElement('h3');
   postTitle.classList = 'userPostTitle';
   postTitle.innerText = title;
-  //console.log(postTitle);
+
   // creates a div with post's contents and appends it to the post
   let postContent = document.createElement('p');
   postContent.classList = 'userPostContent';
   postContent.innerText = content;
-  //console.log(postContent);
+
   // creates a comment box and appends it to the post
   let commentsBox = document.createElement('div');
   commentsBox.classList = "userPostComments";
-  //console.log(commentsBox);
+
+  // creates a delete button
+  let deleteBtn = document.createElement('i');
+  deleteBtn.classList = "fa fa-times";
+  deleteBtn.id = "deletePost";
+  deleteBtn.onclick = "deletePost(event)";
   // a user's post
   userPost.append(postTitle);
   userPost.append(postContent);
   userPost.append(commentsBox);
+  userPost.append(deleteBtn);
+
 };
 
 // Allow a user to view comments on other posts.
@@ -126,6 +281,7 @@ fetch("http://thesi.generalassemb.ly:8080/post",{
 })
 .then((res) => {
   console.log(res);
+  
 /* Allow a user to update their profile information.*/
 // update Profile appears when clicked in drop-down menu
 function displayUpdateProfile(event) {
@@ -158,13 +314,14 @@ function updateProfile(event) {
 
 };
 
+// Allow a user to view comments on other posts.
 
 // Allow a user to create and delete their own comments.
-/*
+// Allow a user to delete
 function deletePost(event) {
   event.preventDefault();
 }
-*/
+
 /*
 function createComment(event) {
   event.preventDefault();
@@ -191,11 +348,11 @@ function createComment(event) {
 
 ----------POST Requests
 create comment
-create post
-create profile
-login
-signup
-update profile
+create post /
+create profile /
+login /
+signup /
+update profile /
 ----------GET Requests
 get comments by Post id
 get comments by User
@@ -209,15 +366,6 @@ delete post by Post Id
 */
 // Use JavaScript for DOM manipulation.
 // Show user-friendly messages in case any errors occur.
-
-
-
-
-
-
-
-
-
 
   //R.H.
 
@@ -256,49 +404,3 @@ function userLog(email, password) {
           console.log(error);
         })
       };
-
-// Allow a user to make a post
-function makePost(event) {
-  event.preventDefault();
-  let title = document.querySelector('.titlePost');
-  let titleDescription = document.querySelector('.titleDescription');
-
-  fetch('http://thesi.generalassemb.ly:8080/post', {
-    method: 'POST',
-    headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user'),
-            "Content-Type": "application/json"
-        },
-    body: JSON.stringify({
-            title: title.value,
-            description: titleDescription.value
-          })
-  })
-  .then((res) => {
-    updateDom(res)
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-}
-
-// The post loads in the DOM
-function updateDom(res) {
-   fetch("http://thesi.generalassemb.ly:8080/user/post", {
-       headers: {
-           "Authorization": "Bearer " + localStorage.getItem('user')
-       }
-   })
-   .then((res) => {
-       return res.json();
-   })
-   .then((res) => {
-       const list = document.querySelector('.posts');
-       for (let i = 0; i < res.length; i++) {
-           manipulateDomPosts(res[i].title, res[i].description)
-       }
-   })
-   .catch((err) => {
-       console.log(err);
-   })
-}

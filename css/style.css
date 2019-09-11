@@ -52,10 +52,6 @@ body {
   font-size: 50px;
   text-shadow: 5px 2px 5px #000000;
   width: 100%;
-  /* padding-top: 30px; */
-
-
-
 }
 
 
@@ -87,7 +83,7 @@ body {
 
 }
 
-.ranttitle {
+.rantTitle {
   font-size: 30px;
   padding: 25px 0;
   font-weight: bold;
@@ -126,7 +122,7 @@ body {
   weight: 700;
 }
 
-/* navbar styling */
+/* top nav bar styling */
 .mainNav{
   overflow: hidden;
   background-color: lightgray;
@@ -206,7 +202,10 @@ body {
   margin-top: 30px;
 }
 
-
+.sidenav>p {
+  color: white;
+  text-align: center;
+}
 
 .loginForm {
   position: relative;
@@ -271,6 +270,11 @@ body {
     font-size: 18px;
 }
 
+.myProfile {
+  background-color: black;
+  color: white;
+  text-align: center;
+}
 .posts {
   display: flex;
   flex-direction: column-reverse;
