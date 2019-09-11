@@ -148,9 +148,9 @@ function updateDom(res) {
         return res.json();
     })
     .then((res) => {
-        const list = document.querySelector('.posts');
+        console.log(res)
         for (let i = 0; i < res.length; i++) {
-            manipulateDomPosts(res[i].title, res[i].description)
+          manipulateDomPosts(res[i].title, res[i].description, res[i].id);
         }
     })
     .catch((err) => {
@@ -208,7 +208,9 @@ function listAllPosts() {
 
 // wednesday C.L.
 // i want to delete my own posts. to delete, i need
-/*
+// to send the token and type (id) to delete
+// to retrieve the post id, i can listallposts and parse through it
+//
 function populatePosts(data) {
   let title, content, username;
 
@@ -225,86 +227,44 @@ function populatePosts(data) {
   }
 };
 
-*/
 
-function manipulateDomPosts(title, content) {
-  // creates a div for each post and appends it to posts-container
-  let userPost = document.createElement('div');
-  userPost.classList = 'userPost';
-  document.querySelector(".posts").appendChild(userPost);
 
-  // creates a post title and appends it to the post
-  let postTitle = document.createElement('h3');
-  postTitle.classList = 'userPostTitle';
-  postTitle.innerText = title;
+function manipulateDomPosts(title, content, id) {
+    // creates a div for each post and appends it to posts-container
+    let userPost = document.createElement('div');
+    userPost.classList = 'userPost';
+    userPost.setAttribute('postId', id);
+    document.querySelector(".posts").appendChild(userPost);
 
-  // creates a div with post's contents and appends it to the post
-  let postContent = document.createElement('p');
-  postContent.classList = 'userPostContent';
-  postContent.innerText = content;
+    // creates a post title and appends it to the post
+    let postTitle = document.createElement('h3');
+    postTitle.classList = 'userPostTitle';
+    postTitle.innerText = title;
 
-  // creates a comment box and appends it to the post
-  let commentsBox = document.createElement('div');
-  commentsBox.classList = "userPostComments";
+    // creates a div with post's contents and appends it to the post
+    let postContent = document.createElement('p');
+    postContent.classList = 'userPostContent';
+    postContent.innerText = content;
 
-  // creates a delete button
-  let deleteBtn = document.createElement('i');
-  deleteBtn.classList = "fa fa-times";
-  deleteBtn.id = "deletePost";
-  deleteBtn.onclick = "deletePost(event)";
-  // a user's post
-  userPost.append(postTitle);
-  userPost.append(postContent);
-  userPost.append(commentsBox);
-  userPost.append(deleteBtn);
+    // creates a comment box and appends it to the post
+    let commentsBox = document.createElement('div');
+    commentsBox.classList = "userPostComments";
 
-};
+    // creates a delete button
+    let deleteBtn = document.createElement('i');
+    deleteBtn.classList = "fa fa-times";
+    deleteBtn.id = "deletePost";
+    deleteBtn.onclick = "deletePost(event)";
+    // a user's post
+    userPost.append(deleteBtn);
+    userPost.append(postTitle);
+    userPost.append(postContent);
+    userPost.append(commentsBox);
+}
 
 // Allow a user to make a post, upon successful POST updateDOM function is called
-function makePost(event) {
-  event.preventDefault();
-  let title = document.querySelector('.titlePost');
-  let titleDescription = document.querySelector('.titleDescription');
-
-  fetch('http://thesi.generalassemb.ly:8080/post', {
-    method: 'POST',
-    headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user'),
-            "Content-Type": "application/json"
-        },
-    body: JSON.stringify({
-            title: title.value,
-            description: titleDescription.value
-          })
-  })
-  .then((res) => {
-    updateDom(res)
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-}
-
 // The post loads in the DOM
-function updateDom(res) {
-    fetch("http://thesi.generalassemb.ly:8080/user/post", {
-        headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user')
-        }
-    })
-    .then((res) => {
-        return res.json();
-    })
-    .then((res) => {
-        const list = document.querySelector('.posts');
-        for (let i = 0; i < res.length; i++) {
-            manipulateDomPosts(res[i].title, res[i].description)
-        }
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-}
+
 /* Allow a user to update their profile information.*/
 // update Profile appears when clicked in drop-down menu
 function displayUpdateProfile(event) {
