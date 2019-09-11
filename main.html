@@ -20,7 +20,7 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="#">Update</a>
+          <a onclick="displayUpdateProfile(event)">Update</a>
           <a href="#">Log Out</a>
         </div>
       </div>
@@ -35,22 +35,29 @@
     <h3>Want to rant?</h3>
     <div class="newRant">
       <!-- add a class so you can use DOM -->
-    <input type="text" placeholder="title"/>
+    <input class="titlePost" type="text" placeholder="title"/>
     <!-- add a class so you can use DOM -->
-    <input type="text" placeholder="description"/>
-    <input class="submitRant" type="submit"/>
+    <input class="titleDescription" type="text" placeholder="description"/>
+    <input onclick = "makePost(event)" class="submitRant" type="submit"/>
     </div>
 
+    <div class="posts">
   <!-- a post -->
       <div class="userPost">
+        <i onclick="deletePost(event)" id="deletePost" class="fa fa-times"></i>
         <p>Posted by: <span class="postOwner"></span></p>
         <h3 class = "userPostTitle">Title</h3>
         <p class = "userPostContent">Content</p>
         <div class = "userPostComents">
-          <h4></h4>
+          <form onSubmit="createComment(event)" class="enterComments">
+            <h4>Comments</h4>
+            <p> Enter a comment: </p>
+            <input class="newComment" type="text"/>
+            <input type="submit"/>
+          </form>
         </div>
       </div>
-
+</div>
       <!-- Template of user post
 
         <div class="userPost">
@@ -64,6 +71,16 @@
     -->
 
     </div>
+
+    <!-- Update Profile Box -->
+      <form class="updateProfile" onSubmit="updateProfile(event)">
+        <br/>
+        <h2>Update profile</h2>
+        <br/>
+        Mobile:
+        <input class="mobile" type="text"/>
+        <input type="submit"/>
+      </form>
 <!-- Side Navigation  -->
 
 <div class="sidenav">
