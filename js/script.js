@@ -251,7 +251,7 @@ function populatePosts(title, content, id, owner) {
   commentSubmit.type = "submit";
   commentSubmit.addEventListener('click', function() {
     event.preventDefault();
-    makeComment(event.target.parentNode);
+    makeComment(event.target.parentNode.getAttribute('postid'));
   });
 
   // if it is the user's post it has a delete option
@@ -303,8 +303,7 @@ function updateProfile(event) {
 // Allow a user to make a comment on a post
 // function passes a postId
 function makeComment(postId) {
-  let commentParent = document.querySelector(`[postid="${postId}"]`);
-  let commentToPost = commentParent.querySelector('.commentInput');
+  let commentToPost= document.querySelector((`[postid="${postId}"]`)).querySelector('.commentInput');
   fetch(`http://thesi.generalassemb.ly:8080/comment/${postId}`, {
     method: 'POST',
     headers: {
@@ -367,7 +366,7 @@ function createComment(event) {
 
 
 ----------POST Requests
-create comment
+create comment /
 create post /
 create profile /
 login /
@@ -403,7 +402,7 @@ function loginUser() {
     userLog(email, password);
   }
 
-
+/* TODO */
 function userLog(email, password) {
   fetch('http://thesi.generalassemb.ly:8080/login', {
     method: 'POST',
