@@ -206,7 +206,7 @@ function listAllPosts() {
   })
 };
 
-// wednesday C.L. 
+// wednesday C.L.
 // i want to delete my own posts. to delete, i need
 /*
 function populatePosts(data) {
@@ -267,6 +267,7 @@ event.preventDefault();
 let titlePost = document.querySelector('.titlepost').value;
 let titledescription = document.querySelector('.titledescription').value;
 
+
 fetch("http://thesi.generalassemb.ly:8080/post",{
   method: 'POST',
   header: {
@@ -281,7 +282,9 @@ fetch("http://thesi.generalassemb.ly:8080/post",{
 })
 .then((res) => {
   console.log(res);
-  
+  })
+
+};
 /* Allow a user to update their profile information.*/
 // update Profile appears when clicked in drop-down menu
 function displayUpdateProfile(event) {
