@@ -247,3 +247,8 @@ body {
 .updateProfile>h2 {
     font-size: 18px;
 }
+
+.posts {
+  display: flex;
+  flex-direction: column-reverse; 
+}

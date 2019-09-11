@@ -35,12 +35,13 @@
     <h3>Want to rant?</h3>
     <div class="newRant">
       <!-- add a class so you can use DOM -->
-    <input type="text" placeholder="title"/>
+    <input class="titlePost" type="text" placeholder="title"/>
     <!-- add a class so you can use DOM -->
-    <input type="text" placeholder="description"/>
-    <input class="submitRant" type="submit"/>
+    <input class="titleDescription" type="text" placeholder="description"/>
+    <input onclick = "makePost(event)" class="submitRant" type="submit"/>
     </div>
 
+    <div class="posts">
   <!-- a post -->
       <div class="userPost">
         <p>Posted by: <span class="postOwner"></span></p>
@@ -55,7 +56,7 @@
           </form>
         </div>
       </div>
-
+</div>
       <!-- Template of user post
 
         <div class="userPost">

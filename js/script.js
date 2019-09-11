@@ -27,16 +27,16 @@ function postData(event) {
           })
   })
   .then((res) => {
-      return res.json();
-  })
-  .then((res) => {
-      localStorage.setItem('user', res.token);
-  })
+        return res.json();
+    })
+    .then((res) => {
+        localStorage.setItem('user', res.token);
+    })
   .catch((err) => {
       console.log(err);
   })
   window.location.href="./main.html";
-};
+}
 
 // after successul sign up, changes username element
 function changeUser() {
@@ -53,7 +53,7 @@ function listAllPosts() {
   })
 };
 
-
+/*
 function populatePosts(data) {
   let title, content, username;
 
@@ -70,19 +70,20 @@ function populatePosts(data) {
   }
 };
 
+*/
 
-function manipulateDomPosts(title, content, user) {
+function manipulateDomPosts(title, content) {
   // creates a div for each post and appends it to posts-container
   let userPost = document.createElement('div');
   userPost.classList = 'userPost';
-  document.querySelector(".posts-container").appendChild(userPost);
+  document.querySelector(".posts").appendChild(userPost);
 
 
   //creates a span for post title and appends it to the post
-  let postOwner = document.createElement('span');
-  postOwner.classList = 'postOwner';
-  postOwner.innerText = `Posted by: ${user}`;
-  //console.log(postOwner);
+  // let postOwner = document.createElement('span');
+  // postOwner.classList = 'postOwner';
+  // postOwner.innerText = `Posted by: ${user}`;
+  // //console.log(postOwner);
 
   // creates a post title and appends it to the post
   let postTitle = document.createElement('h3');
@@ -99,10 +100,9 @@ function manipulateDomPosts(title, content, user) {
   commentsBox.classList = "userPostComments";
   //console.log(commentsBox);
   // a user's post
-  let newPost = document.querySelector('#userPost');
-  newPost.append(postOwner);
-  newPost.append(postContent);
-  newPost.append(commentsBox);
+  userPost.append(postTitle);
+  userPost.append(postContent);
+  userPost.append(commentsBox);
 };
 
 // Allow a user to view comments on other posts.
@@ -136,9 +136,10 @@ function updateProfile(event) {
   .catch((err) => {
     console.log(err);
   })
-}
+};
 
 // Allow a user to create and delete their own comments.
+/*
 function createComment(event) {
   event.preventDefault();
   let comment = document.querySelector('.newComment');
@@ -159,7 +160,52 @@ function createComment(event) {
     console.log(err);
   })
 };
+*/
 
+function makePost(event) {
+  event.preventDefault();
+  let title = document.querySelector('.titlePost');
+  let titleDescription = document.querySelector('.titleDescription');
+
+  fetch('http://thesi.generalassemb.ly:8080/post', {
+    method: 'POST',
+    headers: {
+            "Authorization": "Bearer " + localStorage.getItem('user'),
+            "Content-Type": "application/json"
+        },
+    body: JSON.stringify({
+            title: title.value,
+            description: titleDescription.value
+          })
+  })
+  .then((res) => {
+    updateDom(res)
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+}
+
+
+function updateDom(res) {
+    fetch("http://thesi.generalassemb.ly:8080/user/post", {
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem('user')
+        }
+    })
+    .then((res) => {
+        return res.json();
+    })
+    .then((res) => {
+        const list = document.querySelector('.posts');
+        for (let i = 0; i < res.length; i++) {
+            manipulateDomPosts(res[i].title, res[i].description)
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}
 /*
 ----------POST Requests
 create comment
