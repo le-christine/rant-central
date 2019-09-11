@@ -250,5 +250,11 @@ body {
 
 .posts {
   display: flex;
-  flex-direction: column-reverse; 
+  flex-direction: column-reverse;
+}
+
+#deletePost{
+  font-size: 30px;
+  margin-left: 0px;
+  float: right;
 }

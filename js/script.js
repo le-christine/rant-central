@@ -107,7 +107,7 @@ function manipulateDomPosts(title, content) {
 
 // Allow a user to view comments on other posts.
 
-// Allow a user to update their profile information.
+/* Allow a user to update their profile information.*/
 // update Profile appears when clicked in drop-down menu
 function displayUpdateProfile(event) {
   event.preventDefault();
@@ -139,6 +139,11 @@ function updateProfile(event) {
 };
 
 // Allow a user to create and delete their own comments.
+/*
+function deletePost(event) {
+  event.preventDefault();
+}
+*/
 /*
 function createComment(event) {
   event.preventDefault();
