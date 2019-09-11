@@ -32,7 +32,7 @@
     <h4>Posts</h4>
 
     <!-- make new post -->
-    <h3>Want to rant?</h3>
+    <h3 class="ranttitle">Rant Away!</h3>
     <div class="newRant">
       <!-- add a class so you can use DOM -->
     <input class="titlepost" type="text" placeholder="title"/>
@@ -51,21 +51,16 @@
         </div>
       </div>
 
-      <!-- Template of user post
+      <div class="sidenav">
+        <form class="makeUserProfile" onsubmit="createProfile(event)">
+          <input type="text" placeholder="Additional Email" class="addtEmail"/>
+          <input type="text" placeholder="Mobile" class="mobile"/>
+          <input type="text" placeholder="Address" class="address"/>
+          <input type="submit" class="submitCreateProfile"/>
+        </form>
+      </div>
 
 
-
-
-    </div>
-<!Side Navigation  -->
-
-<!-- <div class="sidenav">
-<a href="#">Sports</a>
-<a href="#">News</a>
-<a href="#">Health</a>
-<a href="#">Fashion</a>
-<a href="#">Technology</a>
-</div> -->
 <script src="js/script.js"></script>
   </body>
 </html>
