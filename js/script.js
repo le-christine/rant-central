@@ -149,7 +149,7 @@ function updateDom(res) {
     })
     .then((res) => {
         for (let i = 0; i < res.length; i++) {
-          manipulateDomPosts(res[i].title, res[i].description, res[i].id);
+          manipulateDomPosts(res[i].title, res[i].description, res[i].id, res[i].user.username);
         }
     })
     .catch((err) => {
@@ -205,7 +205,7 @@ function listAllPosts() {
   })
   .then((res) => {
     for (let i = 0; i < res.length; i++) {
-      manipulateDomPosts(res[i].title, res[i].description, res[i].id);
+    populatePosts(res[i].title, res[i].description, res[i].id, res[i].user.username);
     }
   })
 };
@@ -215,21 +215,46 @@ listAllPosts();
 // to send the token and type (id) to delete
 // to retrieve the post id, i can listallposts and parse through it
 //
-function populatePosts(data) {
-  let title, content, username;
+function populatePosts(title, content, id, owner) {
+  let userPost = document.createElement('div');
+  userPost.classList = 'userPost';
+  userPost.setAttribute('postId', id);
+  document.querySelector(".posts").appendChild(userPost);
 
-  for (let i = 0; i<data.length; i++) {
-    title = data[i]['title'];
-    username = data[i]['user']['username'];
-    if (data[i]['description']) {
-      content = data[i]['description'];
-    } else {
-      console.log(data[i]['description']);
-      content = ' ';
-    }
-  //manipulateDomPosts(title, content, username)
+  // creates a post title and appends it to the post
+  let postTitle = document.createElement('h3');
+  postTitle.classList = 'userPostTitle';
+  postTitle.innerText = title;
+
+  // creates a div with post's contents and appends it to the post
+  let postContent = document.createElement('p');
+  postContent.classList = 'userPostContent';
+  postContent.innerText = content;
+
+  let userOwner = document.createElement('span');
+  userOwner.classList = 'userOwner';
+  userOwner.innerText = `Posted by: ${owner}`;
+  // creates a comment box and appends it to the post
+  let commentsBox = document.createElement('div');
+  commentsBox.classList = "userPostComments";
+
+  let deleteBtn;
+  // creates a delete button
+
+  // a user's post
+  // if it is the user's post it has a delete option
+  if (owner === localStorage.getItem('username')) {
+    deleteBtn = document.createElement('i');
+    deleteBtn.classList = "fa fa-times";
+    deleteBtn.id = "deletePost";
+    deleteBtn.onclick = "deletePost(event)";
+    userPost.append(deleteBtn);
   }
-};
+  userPost.append(postTitle);
+  userPost.append(userOwner);
+  userPost.append(postContent);
+  userPost.append(commentsBox);
+}
 
 
 

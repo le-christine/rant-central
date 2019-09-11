@@ -102,7 +102,7 @@ body {
   }
 }
 
-.userPostContent {
+.userPostContent, .userOwner{
   margin: 2%;
 }
 
@@ -285,4 +285,3 @@ body {
   margin-left: 0px;
   float: right;
 }
-
