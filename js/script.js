@@ -148,7 +148,6 @@ function updateDom(res) {
         return res.json();
     })
     .then((res) => {
-        console.log(res)
         for (let i = 0; i < res.length; i++) {
           manipulateDomPosts(res[i].title, res[i].description, res[i].id);
         }
@@ -201,11 +200,16 @@ function listAllPosts() {
   fetch ('http://thesi.generalassemb.ly:8080/post/list', {
     method: 'GET'
   })
-  .then(function(result) {
-  console.log(result.json());
+  .then((res) => {
+    return res.json();
+  })
+  .then((res) => {
+    for (let i = 0; i < res.length; i++) {
+      manipulateDomPosts(res[i].title, res[i].description, res[i].id);
+    }
   })
 };
-
+listAllPosts();
 // wednesday C.L.
 // i want to delete my own posts. to delete, i need
 // to send the token and type (id) to delete
