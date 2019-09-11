@@ -15,7 +15,7 @@
   <body>
   <div class="topnav">
 
-  <a class="loginRant">Login</a>
+  <a class="loginRant" onclick="displayLoginIn(event)">Login</a>
   <a class="signup" onclick="displaySignUp(event)">Sign-Up</a>
 
 </div>
@@ -39,7 +39,7 @@
       type="password"
       placeholder="password">
 
-    <button class="rantAway" type="submit">Rant Away!</button>
+    <button class="rantAway" type="submit" onclick="loginUser(event)">Rant Away!</button>
   </form>
 </div>
 

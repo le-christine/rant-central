@@ -234,30 +234,19 @@ delete post by Post Id
 // Show user-friendly messages in case any errors occur.
 
 
-/*
-  //R.H.
   // login to rant
 
-function displayLoginIn() {
-  document.querySelector('.loginRant').addEventListener('click', function() {
-    document.querySelector('.loginForm').style.display = 'block';
-  })
+function displayLoginIn(event) {
+  event.preventDefault();
+  document.querySelector('.loginForm').style.display = 'block';
 }
 
-displayLoginIn();
-
 function loginUser() {
-  document.querySelector(".rantAway").addEventListener('click', function(e) {
     e.preventDefault();
-    console.log('test')
     let email = document.querySelector('#loginEmail').value;
     let password = document.querySelector('#loginPassword').value;
-    console.log(email, password)
     userLog(email, password);
-  });
   }
-
-loginUser();
 
 
 function userLog(email, password) {
@@ -280,5 +269,3 @@ function userLog(email, password) {
           console.log(error);
         })
       };
-
-*/
