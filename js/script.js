@@ -148,9 +148,8 @@ function updateDom(res) {
         return res.json();
     })
     .then((res) => {
-        const list = document.querySelector('.posts');
         for (let i = 0; i < res.length; i++) {
-            manipulateDomPosts(res[i].title, res[i].description)
+          populatePosts(res[i].title, res[i].description, res[i].id, res[i].user.username);
         }
     })
     .catch((err) => {
@@ -201,36 +200,25 @@ function listAllPosts() {
   fetch ('http://thesi.generalassemb.ly:8080/post/list', {
     method: 'GET'
   })
-  .then(function(result) {
-  console.log(result.json());
+  .then((res) => {
+    return res.json();
+  })
+  .then((res) => {
+    for (let i = 0; i < res.length; i++) {
+    populatePosts(res[i].title, res[i].description, res[i].id, res[i].user.username);
+    }
   })
 };
-
+listAllPosts();
 // wednesday C.L.
 // i want to delete my own posts. to delete, i need
-/*
-function populatePosts(data) {
-  let title, content, username;
-
-  for (let i = 0; i<data.length; i++) {
-    title = data[i]['title'];
-    username = data[i]['user']['username'];
-    if (data[i]['description']) {
-      content = data[i]['description'];
-    } else {
-      console.log(data[i]['description']);
-      content = ' ';
-    }
-  //manipulateDomPosts(title, content, username)
-  }
-};
-
-*/
-
-function manipulateDomPosts(title, content) {
-  // creates a div for each post and appends it to posts-container
+// to send the token and type (id) to delete
+// to retrieve the post id, i can listallposts and parse through it
+//
+function populatePosts(title, content, id, owner) {
   let userPost = document.createElement('div');
   userPost.classList = 'userPost';
+  userPost.setAttribute('postId', id);
   document.querySelector(".posts").appendChild(userPost);
 
   // creates a post title and appends it to the post
@@ -243,68 +231,44 @@ function manipulateDomPosts(title, content) {
   postContent.classList = 'userPostContent';
   postContent.innerText = content;
 
+  let userOwner = document.createElement('span');
+  userOwner.classList = 'userOwner';
+  userOwner.innerText = `Posted by: ${owner}`;
   // creates a comment box and appends it to the post
   let commentsBox = document.createElement('div');
   commentsBox.classList = "userPostComments";
 
   // creates a delete button
-  let deleteBtn = document.createElement('i');
-  deleteBtn.classList = "fa fa-times";
-  deleteBtn.id = "deletePost";
-  deleteBtn.onclick = "deletePost(event)";
-  // a user's post
-  userPost.append(postTitle);
-  userPost.append(postContent);
-  userPost.append(commentsBox);
-  userPost.append(deleteBtn);
+  let deleteBtn;
 
-};
+  // creates a comment form
+  makeCommentHeader = document.createElement('h4');
+  makeCommentHeader.innerText = 'Make a comment:';
+  let commentInput = document.createElement('input');
+  commentInput.type = "text";
+  commentInput.classList = "commentInput";
+  let commentSubmit = document.createElement('input');
+  commentSubmit.type = "submit";
+  commentSubmit.addEventListener('click', function() {
+    event.preventDefault();
+    makeComment(event.target.parentNode.getAttribute('postid'));
+  });
+
+  // if it is the user's post it has a delete option
+  if (owner === localStorage.getItem('username')) {
+    deleteBtn = document.createElement('i');
+    deleteBtn.classList = "fa fa-times";
+    deleteBtn.id = "deletePost";
+    deleteBtn.onclick = "deletePost(event)";
+    userPost.append(deleteBtn);
+  }
+  userPost.append(postTitle, userOwner, postContent, commentsBox, makeCommentHeader,
+  commentInput,commentSubmit);
+}
 
 // Allow a user to make a post, upon successful POST updateDOM function is called
-function makePost(event) {
-  event.preventDefault();
-  let title = document.querySelector('.titlePost');
-  let titleDescription = document.querySelector('.titleDescription');
-
-  fetch('http://thesi.generalassemb.ly:8080/post', {
-    method: 'POST',
-    headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user'),
-            "Content-Type": "application/json"
-        },
-    body: JSON.stringify({
-            title: title.value,
-            description: titleDescription.value
-          })
-  })
-  .then((res) => {
-    updateDom(res)
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-}
-
 // The post loads in the DOM
-function updateDom(res) {
-    fetch("http://thesi.generalassemb.ly:8080/user/post", {
-        headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user')
-        }
-    })
-    .then((res) => {
-        return res.json();
-    })
-    .then((res) => {
-        const list = document.querySelector('.posts');
-        for (let i = 0; i < res.length; i++) {
-            manipulateDomPosts(res[i].title, res[i].description)
-        }
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-}
+
 /* Allow a user to update their profile information.*/
 // update Profile appears when clicked in drop-down menu
 function displayUpdateProfile(event) {
@@ -336,6 +300,38 @@ function updateProfile(event) {
   })
 
 };
+// Allow a user to make a comment on a post
+// function passes a postId
+function makeComment(postId) {
+  let commentToPost= document.querySelector((`[postid="${postId}"]`)).querySelector('.commentInput');
+  fetch(`http://thesi.generalassemb.ly:8080/comment/${postId}`, {
+    method: 'POST',
+    headers: {
+            "Authorization": "Bearer " + localStorage.getItem('user'),
+            "Content-Type": "application/json"
+        },
+    body: JSON.stringify({
+          text: commentToPost.value
+      })
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  // grab the comment innerText by getting document selector : div with postid = postId,
+  //let test = document.querySelector('[postid="id"]');
+  //test.querySelector('commentInput').value;
+  // fetch with the url, pass postId
+
+  // call the GET comments function
+  // go through res loop
+  // manipulate comments -- > append to #userPostsComments in the userPost with the post ID
+  //console.log(event.target.parentNode);
+
+
+}
 
 // Allow a user to view comments on other posts.
 
@@ -370,7 +366,7 @@ function createComment(event) {
 
 
 ----------POST Requests
-create comment
+create comment /
 create post /
 create profile /
 login /
@@ -406,7 +402,7 @@ function loginUser() {
     userLog(email, password);
   }
 
-
+/* TODO */
 function userLog(email, password) {
   fetch('http://thesi.generalassemb.ly:8080/login', {
     method: 'POST',
