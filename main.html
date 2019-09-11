@@ -20,7 +20,7 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="#">Update</a>
+          <a onclick="displayUpdateProfile(event)">Update</a>
           <a href="#">Log Out</a>
         </div>
       </div>
@@ -35,13 +35,13 @@
     <h3 class="rantTitle">Rant Away!</h3>
     <div class="newRant">
       <!-- add a class so you can use DOM -->
-    <input class="titlepost" type="text" placeholder="title"/>
+    <input class="titlePost" type="text" placeholder="title"/>
     <!-- add a class so you can use DOM -->
-    <input class="titledescription" type="text" placeholder="description"/>
+    <input class="titleDescription" type="text" placeholder="description"/>
     <input class="submitRant" onclick = "makePost(event)" type="submit"/>
     </div>
 
-      
+
     <div class="posts">
 
   <!-- a post -->
@@ -53,7 +53,7 @@
           <h4></h4>
         </div>
       </div>
-      
+
       <!-- Template of user post
 
 
@@ -68,7 +68,7 @@
 
     </div>
 
-    <!-- Update Profile Box -->
+    <! Update Profile Box -->
       <form class="updateProfile" onSubmit="updateProfile(event)">
         <br/>
         <h2>Update profile</h2>
