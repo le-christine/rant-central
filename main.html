@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Rant Central</title>
-    <link rel="stylesheet" type= "text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!-- FONT AWESOME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Archivo:400,700|Permanent+Marker&display=swap" rel="stylesheet">
+<head>
+  <meta charset="utf-8">
+  <title>Rant Central</title>
+  <link rel="stylesheet" type= "text/css" href="css/reset.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Archivo:400,700|Permanent+Marker&display=swap" rel="stylesheet">
 
-  </head>
-  <body onload="changeUser()">
-    <!-- nav bar -->
-    <nav class="mainNav">
-      <!-- dropdown menu -->
-      <div class="dropdown">
-        <button class="dropbtn"><span class="loggedInUser">Username</span>
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <a onclick="displayUpdateProfile(event)">Update</a>
-          <a href="#">Log Out</a>
-        </div>
+</head>
+<body onload="changeUser()">
+  <!-- nav bar -->
+  <nav class="mainNav">
+    <!-- dropdown menu -->
+    <div class="dropdown">
+      <button class="dropbtn"><span class="loggedInUser">Username</span>
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a onclick="displayUpdateProfile(event)">Update</a>
+        <a href="#">Log Out</a>
       </div>
-      <a href="">Home</a>
-    </nav>
+    </div>
+    <a href="">Home</a>
+  </nav>
 
-    <!-- posts container -->
-    <div class ="posts-container">
+  <!-- posts container -->
+  <div class ="posts-container">
     <h4>Posts</h4>
 
     <!-- make new post -->
     <h3 class="rantTitle">Rant Away!</h3>
     <div class="newRant">
       <!-- add a class so you can use DOM -->
-    <input class="titlePost" type="text" placeholder="title"/>
-    <!-- add a class so you can use DOM -->
-    <input class="titleDescription" type="text" placeholder="description"/>
-    <input class="submitRant" onclick = "makePost(event)" type="submit"/>
+      <input class="titlePost" type="text" placeholder="title"/>
+      <!-- add a class so you can use DOM -->
+      <input class="titleDescription" type="text" placeholder="description"/>
+      <input class="submitRant" onclick = "makePost(event)" type="submit"/>
     </div>
 
 
     <div class="posts">
-
-  <!-- a post -->
+      <!-- a template post
       <div class="userPost">
         <i onclick="deletePost(event)" id="deletePost" class="fa fa-times"></i>
         <h3 class = "userPostTitle">Title</h3>
@@ -53,54 +52,52 @@
         <div class = "userPostComments">
         </div>
 
-          <h4>Make a comment:</h4>
-          <input type="text" class="commentInput"/>
-          <input type="submit" onclick="makeComment(event)"/>
+        <h4>Make a comment:</h4>
+        <input type="text" class="commentInput"/>
+        <input type="submit" onclick="makeComment(event)"/>
       </div>
-
-        </div>
-
-      <!-- Template of user post
-
-
-      <div class="sidenav">
-        <form class="makeUserProfile" onsubmit="createProfile(event)">
-          <input type="text" placeholder="Additional Email" class="addtEmail"/>
-          <input type="text" placeholder="Mobile" class="mobile"/>
-          <input type="text" placeholder="Address" class="address"/>
-          <input type="submit" class="submitCreateProfile"/>
-        </form>
-      </div>
-
+      -->
     </div>
 
-    <! Update Profile Box -->
-      <form class="updateProfile" onSubmit="updateProfile(event)">
-        <br/>
-        <h2>Update profile</h2>
-        <br/>
-        Mobile:
-        <input class="mobile" type="text"/>
+
+    <!-- Update Profile Box -->
+    <form class="updateProfile" onSubmit="updateProfile(event)">
+      <br/>
+      <h2>Update profile</h2>
+      <br/>
+      Mobile:
+      <input class="mobile" type="text"/>
+      <input type="submit"/>
+    </form>
+    <!-- Side Navigation  -->
+
+    <div class="sidenav">
+      <p>Make your profile!</p>
+      <br/>
+      <form class="makeUserProfile" onsubmit="createProfile(event)">
+        <input type="text" placeholder="Additional Email" class="addtEmail"/>
+        <input type="text" placeholder="Mobile" class="addMobile"/>
+        <input type="text" placeholder="Address" class="address"/>
         <input type="submit"/>
       </form>
-<!-- Side Navigation  -->
+      </br>
+      <ul class="usersPosts">
+        <button class="showUserPosts"
+        onclick="getPostsByUser(event)">
+          Click here to show your posts
+        </button>
+      </ul>
+      </br>
+      <ul class="usersComments">
+        <button class="showUserPosts"
+        onclick="getCommentsByUser(event)">
+        Click here to show your comments
+        </button>
 
-<div class="sidenav">
-  <p>Make your profile!</p>
-  <br/>
-  <form class="makeUserProfile" onsubmit="createProfile(event)">
-    <input type="text" placeholder="Additional Email" class="addtEmail"/>
-    <input type="text" placeholder="Mobile" class="addMobile"/>
-    <input type="text" placeholder="Address" class="address"/>
-    <input type="submit"/>
-  </form>
-</div>
+      </ul>
+    </div>
+  </div>
 
-</div>
-
-
-
-
-<script src="js/script.js"></script>
-  </body>
+  <script src="js/script.js"></script>
+</body>
 </html>
