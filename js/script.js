@@ -284,11 +284,6 @@ function viewUser(postId) {
   })
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 85a49062c3ae4ba7541cb1723c12b1f57e8b2f6b
 // Get comments by user and populate in Profile
 function getCommentsByUser(event) {
   event.preventDefault();
@@ -341,10 +336,6 @@ function getPostsByUser(event) {
     })
 }
 
-<<<<<<< HEAD
->>>>>>> af08586467ef66cfac1ac2a836d3ed476544f15b
-=======
->>>>>>> 85a49062c3ae4ba7541cb1723c12b1f57e8b2f6b
 // Load all posts and populate document
 function listAllPosts() {
   fetch ('http://thesi.generalassemb.ly:8080/post/list', {
@@ -358,8 +349,6 @@ function listAllPosts() {
     populatePosts(res[i].title, res[i].description, res[i].id, res[i].user.username);
     }
   })
-<<<<<<< HEAD
-<<<<<<< HEAD
 };
 
 listAllPosts();
@@ -370,17 +359,6 @@ listAllPosts();
 // to send the token and type (id) to delete
 // to retrieve the post id, i can listallposts and parse through it
 //
-=======
-=======
->>>>>>> 85a49062c3ae4ba7541cb1723c12b1f57e8b2f6b
-}
-
-listAllPosts();
-
-<<<<<<< HEAD
->>>>>>> af08586467ef66cfac1ac2a836d3ed476544f15b
-=======
->>>>>>> 85a49062c3ae4ba7541cb1723c12b1f57e8b2f6b
 function populatePosts(title, content, id, owner) {
   let userPost = document.createElement('div');
   userPost.classList = 'userPost';
@@ -406,6 +384,7 @@ function populatePosts(title, content, id, owner) {
 
   // creates a delete button
   let deleteBtn;
+  let btnID = 0;
 
   // creates a comment form
   makeCommentHeader = document.createElement('h4');
@@ -418,6 +397,7 @@ function populatePosts(title, content, id, owner) {
   commentSubmit.addEventListener('click', function() {
     event.preventDefault();
     makeComment(event.target.parentNode.getAttribute('postid'));
+    btnID = event.target.parentNode.getAttribute('postid');
   });
 
   // if it is the user's post it has a delete option
@@ -425,15 +405,13 @@ function populatePosts(title, content, id, owner) {
     deleteBtn = document.createElement('i');
     deleteBtn.classList = "fa fa-times";
     deleteBtn.id = "deletePost";
-    deleteBtn.onclick = "deletePost(event)";
+    deleteBtn.setAttribute("onclick", "deletePost(" +id+")");
     userPost.append(deleteBtn);
   }
   userPost.append(postTitle, userOwner, postContent, commentsBox, makeCommentHeader,
   commentInput,commentSubmit);
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Allow a user to make a post, upon successful POST updateDOM function is called
 // The post loads in the DOM
 
@@ -470,25 +448,6 @@ function updateProfile(event) {
 };
 // Allow a user to make a comment on a post
 // function passes a postId
-function makeComment(postId) {
-  let commentToPost= document.querySelector((`[postid="${postId}"]`)).querySelector('.commentInput');
-  fetch(`http://thesi.generalassemb.ly:8080/comment/${postId}`, {
-    method: 'POST',
-    headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user'),
-            "Content-Type": "application/json"
-        },
-    body: JSON.stringify({
-          text: commentToPost.value
-      })
-    })
-    .then((res) => {
-      console.log(res);
-      viewUser(postId);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
   // grab the comment innerText by getting document selector : div with postid = postId,
   //let test = document.querySelector('[postid="id"]');
   //test.querySelector('commentInput').value;
@@ -500,19 +459,31 @@ function makeComment(postId) {
   //console.log(event.target.parentNode);
 
 
-}
 
 // Allow a user to view comments on other posts.
 
 // Allow a user to create and delete their own comments.
 // Allow a user to delete
-=======
->>>>>>> af08586467ef66cfac1ac2a836d3ed476544f15b
-=======
->>>>>>> 85a49062c3ae4ba7541cb1723c12b1f57e8b2f6b
-function deletePost(event) {
-  event.preventDefault();
-}
+
+
+
+function deletePost(id) {
+  fetch(`http://thesi.generalassemb.ly:8080/post/${postId}` {
+    method: 'DELETE',
+    header: {
+      "Authorization": "Bearer " + localStorage.getItem('user'),
+      "Content-Type": "application/json"
+    }
+},
+  .then((res)
+
+  console.log(id);
+};
+
+
+
+
+
 
 /*
 
