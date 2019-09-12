@@ -420,8 +420,8 @@ signup /
 update profile /
 ----------GET Requests
 get comments by Post id /
-get comments by User
-get posts by User
+get comments by User /
+get posts by User /
 get profile /
 ----------Delete Requests
 delete comment by commentId
