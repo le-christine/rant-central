@@ -430,14 +430,22 @@ function loginUser(event) {
     let password = document.querySelector('#loginPassword').value;
     fetch('http://thesi.generalassemb.ly:8080/login', {
     method: 'POST',
-    header: {
+    headers: {
       'Content-Type' : 'application/json'
-    }
+    },
+    body: JSON.stringify({
+        email: email,
+        password: password
+    })
   })
   .then((res) => {
-    window.location.href="./main.html";
-  })
-  .catch((error) => {
-    console.log(error);
+        return res.json();
+    })
+    .then((res) => {
+        localStorage.setItem('user', res.token);
+        window.location.href="./main.html";
+    })
+  .catch((err) => {
+      console.log(err);
   })
 }
