@@ -402,7 +402,7 @@ login /
 signup /
 update profile /
 ----------GET Requests
-get comments by Post id
+get comments by Post id /
 get comments by User
 get posts by User
 get profile
@@ -424,29 +424,18 @@ function displayLogIn(event) {
   document.querySelector('.loginForm').style.display = 'block';
 }
 
-function loginUser() {
-    e.preventDefault();
+function loginUser(event) {
+    event.preventDefault();
     let email = document.querySelector('#loginEmail').value;
     let password = document.querySelector('#loginPassword').value;
-    userLog(email, password);
-  }
-
-/* TODO */
-function userLog(email, password) {
-  fetch('http://thesi.generalassemb.ly:8080/login', {
-    method: 'Post',
-    headers: {
-      'Content-type':'application/json'
-    },
-    body:JSON.stringify({
-                  email: email,
-                  password: password
-              })
+    fetch('http://thesi.generalassemb.ly:8080/login', {
+    method: 'POST',
+    header: {
+      'Content-Type' : 'application/json'
+    }
   })
-  .then(function(response) {
-    return response.json();
-  }).then(function(data) {
-    location.href="main.html";
+  .then((res) => {
+    window.location.href="./main.html";
   })
   .catch((error) => {
     console.log(error);

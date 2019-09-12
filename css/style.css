@@ -209,16 +209,6 @@ body {
 }
 
 
-.loginForm {
-  position: relative;
-  z-index: 1;
-  max-width: 250px;
-  margin: 0 auto 100px;
-  padding: 30px;
-  text-align: center;
-  display: none;
-}
-
 .loginForm input {
   font-family: sans-serif;
   outline:1;
@@ -244,7 +234,7 @@ body {
 }
 
 /* sign up form */
-#signUpForm {
+#signUpForm, .loginForm {
   position: fixed;
   top:20%;
   left: 40%;
