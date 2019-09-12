@@ -28,7 +28,8 @@
 
 <!-- log in form  -->
 
-<div class="loginForm" onclick = "hideLogin(event)">
+<div class="loginForm">
+    <button onclick="hideLogin()"><i class="fa fa-times"></i></button>
     <form onSubmit="userLog(event)">
     <input
       id="loginEmail"
@@ -45,7 +46,9 @@
 
 <!-- sign up form  -->
 
-<div id="signUpForm" onclick="hideSignUp(event)">
+<div id="signUpForm">
+  <button onclick="hideSignUp()"><i class="fa fa-times"></i></button>
+
   <br/>
   <h3> Sign up for Rant Central</h3><br/>
   <form onSubmit="postData(event)">
