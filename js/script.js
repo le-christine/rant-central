@@ -21,9 +21,47 @@ function displayUpdateProfile(event) {
   document.querySelector('.updateProfile').style.display = 'block';
 }
 
+function displayLogIn(event) {
+  event.preventDefault();
+  document.querySelector('.loginForm').style.display = 'block';
+}
+
+// update Profile appears when clicked in drop-down menu
+function displayUpdateProfile(event) {
+  event.preventDefault();
+  document.querySelector('.updateProfile').style.display = 'block';
+}
+
 /**
  * POST REQUESTS
 */
+
+// Login POST request
+function loginUser(event) {
+    event.preventDefault();
+    let email = document.querySelector('#loginEmail').value;
+    let password = document.querySelector('#loginPassword').value;
+    fetch('http://thesi.generalassemb.ly:8080/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type' : 'application/json'
+    },
+    body: JSON.stringify({
+        email: email,
+        password: password
+    })
+  })
+  .then((res) => {
+        return res.json();
+    })
+    .then((res) => {
+        localStorage.setItem('user', res.token);
+        window.location.href="./main.html";
+    })
+  .catch((err) => {
+      console.log(err);
+  })
+}
 
 // Signup POST Request
 // after successful request, redirects user to new page
@@ -156,6 +194,31 @@ function updateDom(res) {
         console.log(err);
     })
 }
+
+// Allow a user to make a comment on a post
+// function passes a postId
+function makeComment(postId) {
+  let commentToPost= document.querySelector((`[postid="${postId}"]`)).querySelector('.commentInput');
+  fetch(`http://thesi.generalassemb.ly:8080/comment/${postId}`, {
+    method: 'POST',
+    headers: {
+            "Authorization": "Bearer " + localStorage.getItem('user'),
+            "Content-Type": "application/json"
+        },
+    body: JSON.stringify({
+          text: commentToPost.value
+      })
+    })
+    .then((res) => {
+      console.log(res);
+      console.log(postId);
+      viewUser(postId);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+}
+
 /**
  * GET REQUESTS
  */
@@ -196,31 +259,82 @@ function showProfile(res) {
 
 // view comments function
 
-function viewUser() {
-  fetch("http://thesi.generalassemb.ly:8080/user/comment", {
+function viewUser(postId) {
+  fetch(`http://thesi.generalassemb.ly:8080/post/${postId}/comment`, {
     method: 'GET',
     headers: {
           "Authorization": "Bearer " + localStorage.getItem('user'),
           "Content-Type": "application/json"
-
-
-  .then((res) => {
-   const viewComments = document.querySelector('div')
+        }
+      })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+    let commentToGet= document.querySelector((`[postid="${postId}"]`)).querySelector('.userPostComments');
     for(let i = 0; i < res.length; i++) {
-    let userComment = res[i];
+    let userComment = res[i].text;
     let p = document.createElement('p');
     p.innerText = userComment;
-    viewComments.appendChild(p) - create a p tag
-
+    commentToGet.appendChild(p); //create a p tag
     }
   })
   .catch((err) => {
     console.log(err)
   })
-  }
-
 }
 
+// Get comments by user and populate in Profile
+function getCommentsByUser(event) {
+  event.preventDefault();
+  fetch('http://thesi.generalassemb.ly:8080/user/comment', {
+    method: 'GET',
+    headers: {
+          "Authorization": "Bearer " + localStorage.getItem('user'),
+          "Content-Type": "application/json"
+        }
+    })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      let loadCommentsHere = document.querySelector('.usersComments');
+      for (let i = 0; i< res.length; i++) {
+        let comment = document.createElement('li');
+        comment.innerText = res[i].text;
+        loadCommentsHere.append(comment);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+}
+
+// get posts by user and populate in profile
+function getPostsByUser(event) {
+  event.preventDefault();
+  fetch('http://thesi.generalassemb.ly:8080/user/post', {
+    method: 'GET',
+    headers: {
+          "Authorization": "Bearer " + localStorage.getItem('user'),
+          "Content-Type": "application/json"
+        }
+    })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      let loadPostsHere = document.querySelector('.usersPosts');
+      for (let i = 0; i< res.length; i++) {
+        let post = document.createElement('li');
+        post.innerText = res[i].title;
+        loadPostsHere.append(post);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+}
 
 // Load all posts and populate document
 function listAllPosts() {
@@ -235,13 +349,10 @@ function listAllPosts() {
     populatePosts(res[i].title, res[i].description, res[i].id, res[i].user.username);
     }
   })
-};
+}
+
 listAllPosts();
-// wednesday C.L.
-// i want to delete my own posts. to delete, i need
-// to send the token and type (id) to delete
-// to retrieve the post id, i can listallposts and parse through it
-//
+
 function populatePosts(title, content, id, owner) {
   let userPost = document.createElement('div');
   userPost.classList = 'userPost';
@@ -293,103 +404,11 @@ function populatePosts(title, content, id, owner) {
   commentInput,commentSubmit);
 }
 
-// Allow a user to make a post, upon successful POST updateDOM function is called
-// The post loads in the DOM
-
-/* Allow a user to update their profile information.*/
-// update Profile appears when clicked in drop-down menu
-function displayUpdateProfile(event) {
-  event.preventDefault();
-  document.querySelector('.updateProfile').style.display = 'block';
-}
-
-// Request to update Profile. Upon success, informs user
-function updateProfile(event) {
-  event.preventDefault();
-
-  let mobile = document.querySelector('.mobile');
-  fetch('http://thesi.generalassemb.ly:8080/profile', {
-    method: 'POST',
-    headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user'),
-            "Content-Type": "application/json"
-        },
-    body: JSON.stringify({
-      mobile: mobile.value
-    })
-  })
-  .then((res) => {
-    console.log(res);
-    alert('Your profile has been successfully updated.');
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-
-};
-// Allow a user to make a comment on a post
-// function passes a postId
-function makeComment(postId) {
-  let commentToPost= document.querySelector((`[postid="${postId}"]`)).querySelector('.commentInput');
-  fetch(`http://thesi.generalassemb.ly:8080/comment/${postId}`, {
-    method: 'POST',
-    headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user'),
-            "Content-Type": "application/json"
-        },
-    body: JSON.stringify({
-          text: commentToPost.value
-      })
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  // grab the comment innerText by getting document selector : div with postid = postId,
-  //let test = document.querySelector('[postid="id"]');
-  //test.querySelector('commentInput').value;
-  // fetch with the url, pass postId
-
-  // call the GET comments function
-  // go through res loop
-  // manipulate comments -- > append to #userPostsComments in the userPost with the post ID
-  //console.log(event.target.parentNode);
-
-
-}
-
-// Allow a user to view comments on other posts.
-
-// Allow a user to create and delete their own comments.
-// Allow a user to delete
 function deletePost(event) {
   event.preventDefault();
 }
 
 /*
-function createComment(event) {
-  event.preventDefault();
-  let comment = document.querySelector('.newComment');
-  fetch('http://thesi.generalassemb.ly:8080/comment/3', {
-    method: 'POST',
-    headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user'),
-            "Content-Type": "application/json"
-        },
-    body: JSON.stringify({
-      text: comment.value
-    })
-  })
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err)=> {
-    console.log(err);
-  })
-};
-
 
 
 ----------POST Requests
@@ -400,53 +419,12 @@ login /
 signup /
 update profile /
 ----------GET Requests
-get comments by Post id
-get comments by User
-get posts by User
-get profile
-signup
+get comments by Post id /
+get comments by User /
+get posts by User /
+get profile /
 ----------Delete Requests
 delete comment by commentId
 delete post by Post Id
 
 */
-// Use JavaScript for DOM manipulation.
-// Show user-friendly messages in case any errors occur.
-
-  //R.H.
-
-  // login to rant
-
-function displayLogIn(event) {
-  event.preventDefault();
-  document.querySelector('.loginForm').style.display = 'block';
-}
-
-function loginUser() {
-    e.preventDefault();
-    let email = document.querySelector('#loginEmail').value;
-    let password = document.querySelector('#loginPassword').value;
-    userLog(email, password);
-  }
-
-/* TODO */
-function userLog(email, password) {
-  fetch('http://thesi.generalassemb.ly:8080/login', {
-    method: 'Post',
-    headers: {
-      'Content-type':'application/json'
-    },
-    body:JSON.stringify({
-                  email: email,
-                  password: password
-              })
-  })
-  .then(function(response) {
-    return response.json();
-  }).then(function(data) {
-    location.href="main.html";
-  })
-  .catch((error) => {
-    console.log(error);
-  })
-}
