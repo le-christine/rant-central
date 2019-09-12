@@ -186,9 +186,8 @@ function updateDom(res) {
         return res.json();
     })
     .then((res) => {
-        for (let i = 0; i < res.length; i++) {
-          populatePosts(res[i].title, res[i].description, res[i].id, res[i].user.username);
-        }
+        document.querySelector('.posts').innerHTML="";
+        listAllPosts();
     })
     .catch((err) => {
         console.log(err);
@@ -210,9 +209,8 @@ function makeComment(postId) {
       })
     })
     .then((res) => {
-      console.log(res);
-      console.log(postId);
-      viewUser(postId);
+      document.querySelector((`[commentBoxId="${postId}"]`)).innerHTML="";
+      viewComments(postId);
     })
     .catch((error) => {
       console.log(error);
@@ -259,11 +257,10 @@ function showProfile(res) {
 
 // view comments function
 
-function viewUser(postId) {
+function viewComments(postId) {
   fetch(`http://thesi.generalassemb.ly:8080/post/${postId}/comment`, {
     method: 'GET',
     headers: {
-          "Authorization": "Bearer " + localStorage.getItem('user'),
           "Content-Type": "application/json"
         }
       })
@@ -271,14 +268,10 @@ function viewUser(postId) {
       return res.json();
     })
     .then((res) => {
-    let commentToGet= document.querySelector((`[postid="${postId}"]`)).querySelector('.userPostComments');
-    for(let i = 0; i < res.length; i++) {
-    let userComment = res[i].text;
-    let p = document.createElement('p');
-    p.innerText = userComment;
-    commentToGet.appendChild(p); //create a p tag
+      for (let i = 0; i < res.length; i++ ) {
+      manipulateDomComments(res[i].id, res[i].text, res[i].post.id);
     }
-  })
+    })
   .catch((err) => {
     console.log(err)
   })
@@ -375,6 +368,7 @@ function populatePosts(title, content, id, owner) {
   // creates a comment box and appends it to the post
   let commentsBox = document.createElement('div');
   commentsBox.classList = "userPostComments";
+  commentsBox.setAttribute('commentBoxId', id);
 
   // creates a delete button
   let deleteBtn;
@@ -402,10 +396,57 @@ function populatePosts(title, content, id, owner) {
   }
   userPost.append(postTitle, userOwner, postContent, commentsBox, makeCommentHeader,
   commentInput,commentSubmit);
+  viewComments(id);
 }
 
 function deletePost(event) {
   event.preventDefault();
+}
+
+
+
+function deleteComment(commentId, postId) {
+  fetch (`http://thesi.generalassemb.ly:8080/comment/${commentId}`, {
+    method: 'DELETE',
+    headers: {
+          "Authorization": "Bearer " + localStorage.getItem('user'),
+          "Content-Type": "application/json"
+        }
+  })
+  .then(function(response) {
+    if (response.status === 200) {
+    removeCommentFromDom(commentId, postId);
+  } else {
+    alert('Error. You can only remove your own comments.');
+  }
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+}
+
+function removeCommentFromDom(commentId, postId) {
+  let commentToRemove = document.querySelector((`[commentid="${commentId}"]`));
+  let removeFromParent = document.querySelector((`[commentboxid="${postId}"]`));
+  removeFromParent.removeChild(commentToRemove);
+}
+
+
+function manipulateDomComments(commentId, commentText, id, username) {
+  let commentToGet= document.querySelector((`[commentboxid="${id}"]`));
+  let deleteBtn;
+  let p = document.createElement('p');
+  p.setAttribute('commentid', commentId);
+  deleteBtn = document.createElement('button');
+  deleteBtn.classList = "fa fa-times";
+  deleteBtn.id = "deleteComment";
+  deleteBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+    deleteComment(commentId, id);
+  })
+  p.innerText = commentText;
+  commentToGet.appendChild(p);
+  p.append(deleteBtn);
 }
 
 /*
