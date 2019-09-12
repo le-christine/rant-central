@@ -269,7 +269,7 @@ function viewComments(postId) {
     })
     .then((res) => {
       for (let i = 0; i < res.length; i++ ) {
-      manipulateDomComments(res[i].id, res[i].text, res[i].post.id);
+        manipulateDomComments(res[i].id, res[i].text, res[i].post.id, res[i].user.username);
     }
     })
   .catch((err) => {
@@ -413,12 +413,8 @@ function deleteComment(commentId, postId) {
           "Content-Type": "application/json"
         }
   })
-  .then(function(response) {
-    if (response.status === 200) {
+  .then((res) => {
     removeCommentFromDom(commentId, postId);
-  } else {
-    alert('Error. You can only remove your own comments.');
-  }
   })
   .catch((error) => {
     console.log(error);
@@ -432,21 +428,23 @@ function removeCommentFromDom(commentId, postId) {
 }
 
 
-function manipulateDomComments(commentId, commentText, id, username) {
+function manipulateDomComments(commentId, commentText, id, commentOwner) {
   let commentToGet= document.querySelector((`[commentboxid="${id}"]`));
-  let deleteBtn;
   let p = document.createElement('p');
+  p.innerText = commentText;
   p.setAttribute('commentid', commentId);
-  deleteBtn = document.createElement('button');
-  deleteBtn.classList = "fa fa-times";
-  deleteBtn.id = "deleteComment";
-  deleteBtn.addEventListener('click', function(event) {
-    event.preventDefault();
-    deleteComment(commentId, id);
-  })
   p.innerText = commentText;
   commentToGet.appendChild(p);
-  p.append(deleteBtn);
+  if (commentOwner == localStorage.getItem('username')) {
+    let deleteBtn = document.createElement('button');
+    deleteBtn.classList = "fa fa-times";
+    deleteBtn.id = "deleteComment";
+    deleteBtn.addEventListener('click', function(event) {
+      event.preventDefault();
+      deleteComment(commentId, id);
+    })
+    p.append(deleteBtn);
+  }
 }
 
 /*
