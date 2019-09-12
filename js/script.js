@@ -42,6 +42,11 @@ function hideUpdateProfile() {
   updateProfile.style.display = 'none';
 }
 
+function logOutUser(event) {
+  event.preventDefault();
+  localStorage.removeItem('user');
+  window.location.href='./index.html';
+}
 /**
  * POST REQUESTS
 */
