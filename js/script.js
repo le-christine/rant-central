@@ -26,32 +26,22 @@ function displayLogIn(event) {
   document.querySelector('.loginForm').style.display = 'block';
 }
 
-// update Profile appears when clicked in drop-down menu
-function displayUpdateProfile(event) {
-  event.preventDefault();
-  document.querySelector('.updateProfile').style.display = 'block';
-}
 
-function hideLogin(event) {
+function hideLogin() {
   let loginForm = document.querySelector('.loginForm');
-  if (event.target.id !== 'loginForm') {
-      loginForm.style.display = 'none';
-    }
-  }
+  loginForm.style.display = 'none';
+}
 
-function hideSignUp(event) {
+function hideSignUp() {
   let signUp = document.querySelector('#signUpForm');
-  if (event.target.id !== 'loginForm') {
-      signUp.style.display = 'none';
-    }
+  signUp.style.display = 'none';
 }
 
-function hideUpdateProfile(event) {
+function hideUpdateProfile() {
   let updateProfile = document.querySelector('.updateProfile');
-  if (event.target.id !== updateProfile) {
-      updateProfile.style.display = 'none';
-    }
+  updateProfile.style.display = 'none';
 }
+
 /**
  * POST REQUESTS
 */
@@ -411,30 +401,13 @@ function populatePosts(title, content, id, owner) {
     deleteBtn = document.createElement('i');
     deleteBtn.classList = "fa fa-times";
     deleteBtn.id = "deletePost";
-    deleteBtn.onclick = "deletePost(event)";
+    deleteBtn.onclick = "deletePost(" +id +")";
     userPost.append(deleteBtn);
   }
   userPost.append(postTitle, userOwner, postContent, commentsBox, makeCommentHeader,
   commentInput,commentSubmit);
   viewComments(id);
 }
-
-function deletePost(event) {
-  event.preventDefault();
-}
-
-// function deletePost(id) {
-  fetch(`http://thesi.generalassemb.ly:8080/post/${postId}` {
-    method: ‘DELETE’,
-    header: {
-      “Authorization”: “Bearer ” + localStorage.getItem(‘user’),
-      “Content-Type”: “application/json”
-    }
-},
-  .then((res)
-
-  console.log(id);
-};
 
 function deleteComment(commentId, postId) {
   fetch (`http://thesi.generalassemb.ly:8080/comment/${commentId}`, {
@@ -478,20 +451,23 @@ function manipulateDomComments(commentId, commentText, id, commentOwner) {
   }
 }
 
-// function to delete post 
+// function to delete post
 
 function deletePost(id) {
-  fetch(`http://thesi.generalassemb.ly:8080/post/${postId}` {
-    method: ‘DELETE’,
-    header: {
-      “Authorization”: “Bearer ” + localStorage.getItem(‘user’),
-      “Content-Type”: “application/json”
-    }
-},
-  .then((res)
-
-  console.log(id);
-};
+  fetch (`http://thesi.generalassemb.ly:8080/post/${id}`, {
+    method: 'DELETE',
+    headers: {
+          "Authorization": "Bearer " + localStorage.getItem('user'),
+          "Content-Type": "application/json"
+        }
+  })
+  .then((res) => {
+    console.log(id);
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+}
 
 /*
 

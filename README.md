@@ -5,6 +5,13 @@ Rant Central is where you can go to post anything you want without judgement.
 Christine Le (@<a href="https://github.com/le-christine">le-christine</a>)<br/>
   Ramel Haines (@<a href="https://github.com/EngineerMel">EngineerMel</a>)
 
+# Technologies Used
+HTML/CSS/JavaScript
+API used: http://thesi.generalassemb.ly:8080
+
+# General Approach
+# Unsolved problems
+
 # Planning
 <html>
   <center>
