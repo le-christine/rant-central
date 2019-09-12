@@ -58,15 +58,16 @@
       </div>
     </div>
     <!-- Update Profile Box -->
-    <form class="updateProfile" onSubmit="updateProfile(event)" onclick="hideUpdateProfile(event)">
+    <div class="updateProfile">
+      <button onclick = "hideUpdateProfile()"><i class="fa fa-times"></i></button>
 
       <br/>
       <h2>Update profile</h2>
       <br/>
       Mobile:
       <input class="mobile" type="text"/>
-      <input type="submit"/>
-    </form>
+      <input type="submit" onclick="updateProfile(event)"/>
+    </div>
     <!-- Side Navigation  -->
 
     <div class="sidenav">
