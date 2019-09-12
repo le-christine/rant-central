@@ -285,7 +285,10 @@ function viewUser(postId) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 85a49062c3ae4ba7541cb1723c12b1f57e8b2f6b
 // Get comments by user and populate in Profile
 function getCommentsByUser(event) {
   event.preventDefault();
@@ -338,7 +341,10 @@ function getPostsByUser(event) {
     })
 }
 
+<<<<<<< HEAD
 >>>>>>> af08586467ef66cfac1ac2a836d3ed476544f15b
+=======
+>>>>>>> 85a49062c3ae4ba7541cb1723c12b1f57e8b2f6b
 // Load all posts and populate document
 function listAllPosts() {
   fetch ('http://thesi.generalassemb.ly:8080/post/list', {
@@ -353,6 +359,7 @@ function listAllPosts() {
     }
   })
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 
 listAllPosts();
@@ -364,11 +371,16 @@ listAllPosts();
 // to retrieve the post id, i can listallposts and parse through it
 //
 =======
+=======
+>>>>>>> 85a49062c3ae4ba7541cb1723c12b1f57e8b2f6b
 }
 
 listAllPosts();
 
+<<<<<<< HEAD
 >>>>>>> af08586467ef66cfac1ac2a836d3ed476544f15b
+=======
+>>>>>>> 85a49062c3ae4ba7541cb1723c12b1f57e8b2f6b
 function populatePosts(title, content, id, owner) {
   let userPost = document.createElement('div');
   userPost.classList = 'userPost';
@@ -420,6 +432,7 @@ function populatePosts(title, content, id, owner) {
   commentInput,commentSubmit);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 // Allow a user to make a post, upon successful POST updateDOM function is called
 // The post loads in the DOM
@@ -495,6 +508,8 @@ function makeComment(postId) {
 // Allow a user to delete
 =======
 >>>>>>> af08586467ef66cfac1ac2a836d3ed476544f15b
+=======
+>>>>>>> 85a49062c3ae4ba7541cb1723c12b1f57e8b2f6b
 function deletePost(event) {
   event.preventDefault();
 }
