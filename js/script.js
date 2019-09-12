@@ -196,31 +196,30 @@ function showProfile(res) {
 
 // view comments function
 
-function viewUser() {
-  fetch("http://thesi.generalassemb.ly:8080/user/comment", {
+function viewUser(postId) {
+  fetch(`http://thesi.generalassemb.ly:8080/post/${postId}/comment`, {
     method: 'GET',
     headers: {
           "Authorization": "Bearer " + localStorage.getItem('user'),
           "Content-Type": "application/json"
-
-
-  .then((res) => {
-   const viewComments = document.querySelector('div')
+        }
+      })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+    let commentToGet= document.querySelector((`[postid="${postId}"]`)).querySelector('.userPostComments');
     for(let i = 0; i < res.length; i++) {
-    let userComment = res[i];
+    let userComment = res[i].text;
     let p = document.createElement('p');
     p.innerText = userComment;
-    viewComments.appendChild(p) - create a p tag
-
+    commentToGet.appendChild(p); //create a p tag
     }
   })
   .catch((err) => {
     console.log(err)
   })
   }
-
-}
-
 
 // Load all posts and populate document
 function listAllPosts() {
@@ -235,7 +234,8 @@ function listAllPosts() {
     populatePosts(res[i].title, res[i].description, res[i].id, res[i].user.username);
     }
   })
-};
+}
+
 listAllPosts();
 // wednesday C.L.
 // i want to delete my own posts. to delete, i need
@@ -343,6 +343,8 @@ function makeComment(postId) {
     })
     .then((res) => {
       console.log(res);
+      console.log(postId);
+      viewUser(postId);
     })
     .catch((error) => {
       console.log(error);
