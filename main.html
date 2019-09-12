@@ -43,7 +43,7 @@
 
 
     <div class="posts">
-      <!-- a template post
+
       <div class="userPost">
         <i onclick="deletePost(event)" id="deletePost" class="fa fa-times"></i>
         <h3 class = "userPostTitle">Title</h3>
@@ -52,16 +52,14 @@
         <div class = "userPostComments">
         </div>
 
-        <h4>Make a comment:</h4>
+         <h4>Make a comment:</h4>
         <input type="text" class="commentInput"/>
         <input type="submit" onclick="makeComment(event)"/>
       </div>
-      -->
     </div>
-
-
     <!-- Update Profile Box -->
     <form class="updateProfile" onSubmit="updateProfile(event)" onclick="hideUpdateProfile(event)">
+
       <br/>
       <h2>Update profile</h2>
       <br/>
@@ -80,6 +78,7 @@
         <input type="text" placeholder="Address" class="address"/>
         <input type="submit"/>
       </form>
+
       </br>
       <ul class="usersPosts">
         <button class="showUserPosts"
@@ -93,6 +92,7 @@
         onclick="getCommentsByUser(event)">
         Click here to show your comments
         </button>
+
 
       </ul>
     </div>

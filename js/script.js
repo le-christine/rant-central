@@ -423,7 +423,18 @@ function deletePost(event) {
   event.preventDefault();
 }
 
+// function deletePost(id) {
+  fetch(`http://thesi.generalassemb.ly:8080/post/${postId}` {
+    method: ‘DELETE’,
+    header: {
+      “Authorization”: “Bearer ” + localStorage.getItem(‘user’),
+      “Content-Type”: “application/json”
+    }
+},
+  .then((res)
 
+  console.log(id);
+};
 
 function deleteComment(commentId, postId) {
   fetch (`http://thesi.generalassemb.ly:8080/comment/${commentId}`, {
@@ -467,8 +478,22 @@ function manipulateDomComments(commentId, commentText, id, commentOwner) {
   }
 }
 
-/*
+// function to delete post 
 
+function deletePost(id) {
+  fetch(`http://thesi.generalassemb.ly:8080/post/${postId}` {
+    method: ‘DELETE’,
+    header: {
+      “Authorization”: “Bearer ” + localStorage.getItem(‘user’),
+      “Content-Type”: “application/json”
+    }
+},
+  .then((res)
+
+  console.log(id);
+};
+
+/*
 
 ----------POST Requests
 create comment /
