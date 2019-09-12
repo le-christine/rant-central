@@ -32,6 +32,26 @@ function displayUpdateProfile(event) {
   document.querySelector('.updateProfile').style.display = 'block';
 }
 
+function hideLogin(event) {
+  let loginForm = document.querySelector('.loginForm');
+  if (event.target.id !== 'loginForm') {
+      loginForm.style.display = 'none';
+    }
+  }
+
+function hideSignUp(event) {
+  let signUp = document.querySelector('#signUpForm');
+  if (event.target.id !== 'loginForm') {
+      signUp.style.display = 'none';
+    }
+}
+
+function hideUpdateProfile(event) {
+  let updateProfile = document.querySelector('.updateProfile');
+  if (event.target.id !== updateProfile) {
+      updateProfile.style.display = 'none';
+    }
+}
 /**
  * POST REQUESTS
 */

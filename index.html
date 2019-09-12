@@ -28,7 +28,7 @@
 
 <!-- log in form  -->
 
-<div class="loginForm">
+<div class="loginForm" onclick = "hideLogin(event)">
     <form onSubmit="userLog(event)">
     <input
       id="loginEmail"
@@ -45,7 +45,7 @@
 
 <!-- sign up form  -->
 
-<div id="signUpForm">
+<div id="signUpForm" onclick="hideSignUp(event)">
   <br/>
   <h3> Sign up for Rant Central</h3><br/>
   <form onSubmit="postData(event)">
