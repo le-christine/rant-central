@@ -32,6 +32,26 @@ function displayUpdateProfile(event) {
   document.querySelector('.updateProfile').style.display = 'block';
 }
 
+function hideLogin(event) {
+  let loginForm = document.querySelector('.loginForm');
+  if (event.target.id !== 'loginForm') {
+      loginForm.style.display = 'none';
+    }
+  }
+
+function hideSignUp(event) {
+  let signUp = document.querySelector('#signUpForm');
+  if (event.target.id !== 'loginForm') {
+      signUp.style.display = 'none';
+    }
+}
+
+function hideUpdateProfile(event) {
+  let updateProfile = document.querySelector('.updateProfile');
+  if (event.target.id !== updateProfile) {
+      updateProfile.style.display = 'none';
+    }
+}
 /**
  * POST REQUESTS
 */
@@ -186,9 +206,8 @@ function updateDom(res) {
         return res.json();
     })
     .then((res) => {
-        for (let i = 0; i < res.length; i++) {
-          populatePosts(res[i].title, res[i].description, res[i].id, res[i].user.username);
-        }
+        document.querySelector('.posts').innerHTML="";
+        listAllPosts();
     })
     .catch((err) => {
         console.log(err);
@@ -210,9 +229,8 @@ function makeComment(postId) {
       })
     })
     .then((res) => {
-      console.log(res);
-      console.log(postId);
-      viewUser(postId);
+      document.querySelector((`[commentBoxId="${postId}"]`)).innerHTML="";
+      viewComments(postId);
     })
     .catch((error) => {
       console.log(error);
@@ -259,11 +277,10 @@ function showProfile(res) {
 
 // view comments function
 
-function viewUser(postId) {
+function viewComments(postId) {
   fetch(`http://thesi.generalassemb.ly:8080/post/${postId}/comment`, {
     method: 'GET',
     headers: {
-          "Authorization": "Bearer " + localStorage.getItem('user'),
           "Content-Type": "application/json"
         }
       })
@@ -271,14 +288,10 @@ function viewUser(postId) {
       return res.json();
     })
     .then((res) => {
-    let commentToGet= document.querySelector((`[postid="${postId}"]`)).querySelector('.userPostComments');
-    for(let i = 0; i < res.length; i++) {
-    let userComment = res[i].text;
-    let p = document.createElement('p');
-    p.innerText = userComment;
-    commentToGet.appendChild(p); //create a p tag
+      for (let i = 0; i < res.length; i++ ) {
+        manipulateDomComments(res[i].id, res[i].text, res[i].post.id, res[i].user.username);
     }
-  })
+    })
   .catch((err) => {
     console.log(err)
   })
@@ -349,16 +362,10 @@ function listAllPosts() {
     populatePosts(res[i].title, res[i].description, res[i].id, res[i].user.username);
     }
   })
-};
+}
 
 listAllPosts();
 
-
-// wednesday C.L.
-// i want to delete my own posts. to delete, i need
-// to send the token and type (id) to delete
-// to retrieve the post id, i can listallposts and parse through it
-//
 function populatePosts(title, content, id, owner) {
   let userPost = document.createElement('div');
   userPost.classList = 'userPost';
@@ -381,10 +388,10 @@ function populatePosts(title, content, id, owner) {
   // creates a comment box and appends it to the post
   let commentsBox = document.createElement('div');
   commentsBox.classList = "userPostComments";
+  commentsBox.setAttribute('commentBoxId', id);
 
   // creates a delete button
   let deleteBtn;
-  let btnID = 0;
 
   // creates a comment form
   makeCommentHeader = document.createElement('h4');
@@ -397,7 +404,6 @@ function populatePosts(title, content, id, owner) {
   commentSubmit.addEventListener('click', function() {
     event.preventDefault();
     makeComment(event.target.parentNode.getAttribute('postid'));
-    btnID = event.target.parentNode.getAttribute('postid');
   });
 
   // if it is the user's post it has a delete option
@@ -405,74 +411,24 @@ function populatePosts(title, content, id, owner) {
     deleteBtn = document.createElement('i');
     deleteBtn.classList = "fa fa-times";
     deleteBtn.id = "deletePost";
-    deleteBtn.setAttribute("onclick", "deletePost(" +id+")");
+    deleteBtn.onclick = "deletePost(event)";
     userPost.append(deleteBtn);
   }
   userPost.append(postTitle, userOwner, postContent, commentsBox, makeCommentHeader,
   commentInput,commentSubmit);
+  viewComments(id);
 }
 
-// Allow a user to make a post, upon successful POST updateDOM function is called
-// The post loads in the DOM
-
-/* Allow a user to update their profile information.*/
-// update Profile appears when clicked in drop-down menu
-function displayUpdateProfile(event) {
+function deletePost(event) {
   event.preventDefault();
-  document.querySelector('.updateProfile').style.display = 'block';
 }
 
-// Request to update Profile. Upon success, informs user
-function updateProfile(event) {
-  event.preventDefault();
-
-  let mobile = document.querySelector('.mobile');
-  fetch('http://thesi.generalassemb.ly:8080/profile', {
-    method: 'POST',
-    headers: {
-            "Authorization": "Bearer " + localStorage.getItem('user'),
-            "Content-Type": "application/json"
-        },
-    body: JSON.stringify({
-      mobile: mobile.value
-    })
-  })
-  .then((res) => {
-    console.log(res);
-    alert('Your profile has been successfully updated.');
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-
-};
-// Allow a user to make a comment on a post
-// function passes a postId
-  // grab the comment innerText by getting document selector : div with postid = postId,
-  //let test = document.querySelector('[postid="id"]');
-  //test.querySelector('commentInput').value;
-  // fetch with the url, pass postId
-
-  // call the GET comments function
-  // go through res loop
-  // manipulate comments -- > append to #userPostsComments in the userPost with the post ID
-  //console.log(event.target.parentNode);
-
-
-
-// Allow a user to view comments on other posts.
-
-// Allow a user to create and delete their own comments.
-// Allow a user to delete
-
-
-
-function deletePost(id) {
+// function deletePost(id) {
   fetch(`http://thesi.generalassemb.ly:8080/post/${postId}` {
-    method: 'DELETE',
+    method: ‘DELETE’,
     header: {
-      "Authorization": "Bearer " + localStorage.getItem('user'),
-      "Content-Type": "application/json"
+      “Authorization”: “Bearer ” + localStorage.getItem(‘user’),
+      “Content-Type”: “application/json”
     }
 },
   .then((res)
@@ -480,13 +436,64 @@ function deletePost(id) {
   console.log(id);
 };
 
+function deleteComment(commentId, postId) {
+  fetch (`http://thesi.generalassemb.ly:8080/comment/${commentId}`, {
+    method: 'DELETE',
+    headers: {
+          "Authorization": "Bearer " + localStorage.getItem('user'),
+          "Content-Type": "application/json"
+        }
+  })
+  .then((res) => {
+    removeCommentFromDom(commentId, postId);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+}
+
+function removeCommentFromDom(commentId, postId) {
+  let commentToRemove = document.querySelector((`[commentid="${commentId}"]`));
+  let removeFromParent = document.querySelector((`[commentboxid="${postId}"]`));
+  removeFromParent.removeChild(commentToRemove);
+}
 
 
+function manipulateDomComments(commentId, commentText, id, commentOwner) {
+  let commentToGet= document.querySelector((`[commentboxid="${id}"]`));
+  let p = document.createElement('p');
+  p.innerText = commentText;
+  p.setAttribute('commentid', commentId);
+  p.innerText = commentText;
+  commentToGet.appendChild(p);
+  if (commentOwner == localStorage.getItem('username')) {
+    let deleteBtn = document.createElement('button');
+    deleteBtn.classList = "fa fa-times";
+    deleteBtn.id = "deleteComment";
+    deleteBtn.addEventListener('click', function(event) {
+      event.preventDefault();
+      deleteComment(commentId, id);
+    })
+    p.append(deleteBtn);
+  }
+}
 
+// function to delete post 
 
+function deletePost(id) {
+  fetch(`http://thesi.generalassemb.ly:8080/post/${postId}` {
+    method: ‘DELETE’,
+    header: {
+      “Authorization”: “Bearer ” + localStorage.getItem(‘user’),
+      “Content-Type”: “application/json”
+    }
+},
+  .then((res)
+
+  console.log(id);
+};
 
 /*
-
 
 ----------POST Requests
 create comment /
