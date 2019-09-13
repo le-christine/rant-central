@@ -6,10 +6,10 @@ Christine Le (@<a href="https://github.com/le-christine">le-christine</a>)<br/>
 Ramel Haines (@<a href="https://github.com/EngineerMel">EngineerMel</a>)
 
 # Technologies Used
-1. HTML</br>
-2. CSS</br>
-3. JavaScript</br>
-API used: http://thesi.generalassemb.ly:8080
+1. HTML
+2. CSS
+3. JavaScript
+4. API used: http://thesi.generalassemb.ly:8080
 
 # General Approach
 We reviewed the project requirements and sketched a wireframe. We kept the design simple, and added key features to make interactions as seamless as possible. On Monday we planned our week, scheduling most of the time for writing JavaScript functions. There are two pages, a landing page and a main page that loads all posts. They both read from the same styling and script files. 
