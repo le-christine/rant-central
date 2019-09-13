@@ -47,6 +47,8 @@ function hideUpdateProfile() {
   event.preventDefault();
   localStorage.removeItem('user'),
   window.location.href='./index.html';
+
+    
 }
 /**
  * POST REQUESTS
@@ -56,6 +58,7 @@ function hideUpdateProfile() {
 function loginUser(event) {
     event.preventDefault();
     let email = document.querySelector('#loginEmail').value;
+    localStorage.setItem('username', email);
     let password = document.querySelector('#loginPassword').value;
     fetch('http://thesi.generalassemb.ly:8080/login', {
     method: 'POST',
@@ -68,14 +71,14 @@ function loginUser(event) {
     })
   })
   .then((res) => {
-        return res.json();
-    })
-    .then((res) => {
-        localStorage.setItem('user', res.token);
-        window.location.href="./main.html";
-    })
+      return res.json();
+  })
+  .then((res) => {
+    localStorage.setItem('user', res.token);
+    window.location.href="./main.html";
+  })
   .catch((err) => {
-      console.log(err);
+    console.log(err);
   })
 }
 
@@ -104,7 +107,6 @@ function postData(event) {
         return res.json();
     })
     .then((res) => {
-        console.log(res.token);
         localStorage.setItem('user', res.token);
         window.location.href="./main.html";
     })
@@ -424,8 +426,12 @@ function deleteComment(commentId, postId) {
           "Content-Type": "application/json"
         }
   })
-  .then((res) => {
-    removeCommentFromDom(commentId, postId);
+  .then(function(response) {
+    if (response.status === 200) {
+      removeCommentFromDom(commentId, postId);
+    } else {
+      alert('Error. You are only allowed to delete your own comments.');
+    }
   })
   .catch((error) => {
     console.log(error);
@@ -446,16 +452,15 @@ function manipulateDomComments(commentId, commentText, id, commentOwner) {
   p.setAttribute('commentid', commentId);
   p.innerText = commentText;
   commentToGet.appendChild(p);
-  if (commentOwner == localStorage.getItem('username')) {
-    let deleteBtn = document.createElement('button');
-    deleteBtn.classList = "fa fa-times";
-    deleteBtn.id = "deleteComment";
-    deleteBtn.addEventListener('click', function(event) {
-      event.preventDefault();
-      deleteComment(commentId, id);
-    })
-    p.append(deleteBtn);
-  }
+
+  let deleteBtn = document.createElement('button');
+  deleteBtn.classList = "fa fa-times";
+  deleteBtn.id = "deleteComment";
+  deleteBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+    deleteComment(commentId, id);
+  })
+  p.append(deleteBtn);
 }
 
 // function to delete post
