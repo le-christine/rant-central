@@ -6,7 +6,9 @@ Christine Le (@<a href="https://github.com/le-christine">le-christine</a>)<br/>
 Ramel Haines (@<a href="https://github.com/EngineerMel">EngineerMel</a>)
 
 # Technologies Used
-HTML/CSS/JavaScript</br>
+1. HTML</br>
+2. CSS</br>
+3. JavaScript</br>
 API used: http://thesi.generalassemb.ly:8080
 
 # General Approach
