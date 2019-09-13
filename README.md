@@ -6,12 +6,17 @@ Christine Le (@<a href="https://github.com/le-christine">le-christine</a>)<br/>
 Ramel Haines (@<a href="https://github.com/EngineerMel">EngineerMel</a>)
 
 # Technologies Used
-HTML/CSS/JavaScript
+HTML/CSS/JavaScript</br/>
 API used: http://thesi.generalassemb.ly:8080
 
 # General Approach
+We reviewed the project requirements and sketched a wireframe. We kept the design simple, and added key features to make interactions as seamless as possible. On Monday we planned our week, scheduling most of the time for writing JavaScript functions. There are two pages, a landing page and a main page that loads all posts. They both read from the same styling and script files. 
 
 # Unsolved problems
+
+1. Have a separate profile page or window, rather than a sidebar.
+2. Add time posted to posts.
+3. Allow users to like the comments
 
 # Planning
 <html>
