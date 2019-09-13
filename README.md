@@ -25,9 +25,10 @@ We reviewed the project requirements and sketched a wireframe. We kept the desig
 # Unsolved problems
 
 1. Have a separate profile page or window, rather than a sidebar.
-2. Add time posted to posts.
-3. Add responsiveness to the pages.
-4. Allow users to like the comments.
+2. Improve design and add larger text input for posts and comments. 
+3. Add time posted to posts.
+4. Add responsiveness to the pages.
+5. Allow users to like the comments.
 
 # Planning
 <html>
