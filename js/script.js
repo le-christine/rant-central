@@ -45,10 +45,10 @@ function hideUpdateProfile() {
 
   function logOutUser(event) {
   event.preventDefault();
-  localStorage.removeItem('user'),
+  localStorage.removeItem('user');
   window.location.href='./index.html';
 
-    
+
 }
 /**
  * POST REQUESTS
@@ -137,6 +137,7 @@ function createProfile(event) {
   })
   .then((res) =>{
     alert('You have successfully created a profile');
+    document.querySelector('.makeUserProfile').style.display = "none";
     displayProfile();
   })
   .catch((error) => {
@@ -162,6 +163,8 @@ function updateProfile(event) {
   .then((res) => {
     console.log(res);
     alert('Your profile has been successfully updated.');
+    document.querySelector('.myProfile').innerText = "";
+    displayProfile();
   })
   .catch((err) => {
     console.log(err);
@@ -261,8 +264,7 @@ function displayProfile() {
 
 function showProfile(res) {
   let sidenav = document.querySelector('.sidenav');
-  let usersProfile = document.createElement('div');
-  usersProfile.classList = 'myProfile';
+  let usersProfile = document.querySelector('.myProfile');
   usersProfile.innerText = `\n\nWelcome, ${res.user.username}!\n
                             Additional email address:\n
                             ${res.additionalEmail}\n
@@ -483,23 +485,3 @@ function deletePost(id) {
   })
 
 }
-
-/*
-
-----------POST Requests
-create comment /
-create post /
-create profile /
-login /
-signup /
-update profile /
-----------GET Requests
-get comments by Post id /
-get comments by User /
-get posts by User /
-get profile /
-----------Delete Requests
-delete comment by commentId
-delete post by Post Id
-
-*/
