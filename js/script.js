@@ -26,27 +26,29 @@ function displayLogIn(event) {
   document.querySelector('.loginForm').style.display = 'block';
 }
 
+// update Profile appears when clicked in drop-down menu
 
 function hideLogin() {
   let loginForm = document.querySelector('.loginForm');
-  loginForm.style.display = 'none';
-}
+      loginForm.style.display = 'none';
+    }
 
 function hideSignUp() {
   let signUp = document.querySelector('#signUpForm');
-  signUp.style.display = 'none';
-}
+      signUp.style.display = 'none';
+    }
 
 function hideUpdateProfile() {
   let updateProfile = document.querySelector('.updateProfile');
-  updateProfile.style.display = 'none';
-}
+      updateProfile.style.display = 'none';
+    }
 
-function logOutUser(event) {
+  function logOutUser(event) {
   event.preventDefault();
-  localStorage.removeItem('user');
-  localStorage.removeItem('username');
-  window.location.href='./index.html'
+  localStorage.removeItem('user'),
+  window.location.href='./index.html';
+
+    
 }
 /**
  * POST REQUESTS
@@ -407,13 +409,14 @@ function populatePosts(title, content, id, owner) {
     deleteBtn = document.createElement('i');
     deleteBtn.classList = "fa fa-times";
     deleteBtn.id = "deletePost";
-    deleteBtn.onclick = "deletePost(" +id +")";
+    deleteBtn.setAttribute("onclick", "deletePost(" +id+")");
     userPost.append(deleteBtn);
   }
   userPost.append(postTitle, userOwner, postContent, commentsBox, makeCommentHeader,
   commentInput,commentSubmit);
   viewComments(id);
 }
+
 
 function deleteComment(commentId, postId) {
   fetch (`http://thesi.generalassemb.ly:8080/comment/${commentId}`, {
@@ -463,17 +466,20 @@ function manipulateDomComments(commentId, commentText, id, commentOwner) {
 // function to delete post
 
 function deletePost(id) {
-  fetch (`http://thesi.generalassemb.ly:8080/post/${id}`, {
+  fetch(`http://thesi.generalassemb.ly:8080/post/${id}`, {
     method: 'DELETE',
     headers: {
           "Authorization": "Bearer " + localStorage.getItem('user'),
           "Content-Type": "application/json"
         }
-  })
+      })
   .then((res) => {
-    console.log(id);
-  })
+    document.querySelector('.posts').innerHTML = "";
+    listAllPosts();
+    })
+
   .catch((error) => {
-    console.log(error)
+  console.log(id);
   })
+
 }
