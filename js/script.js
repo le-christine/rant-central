@@ -477,23 +477,3 @@ function deletePost(id) {
     console.log(error)
   })
 }
-
-/*
-
-----------POST Requests
-create comment /
-create post /
-create profile /
-login /
-signup /
-update profile /
-----------GET Requests
-get comments by Post id /
-get comments by User /
-get posts by User /
-get profile /
-----------Delete Requests
-delete comment by commentId
-delete post by Post Id
-
-*/
