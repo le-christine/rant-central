@@ -1,7 +1,10 @@
 console.log("hello world");
 
+
 /**
- * EVENT HANDLERS
+ *                *
+ * EVENT HANDLERS *
+ *                *
  */
 
 // When signup button is clicked, form appears
@@ -50,9 +53,13 @@ function hideUpdateProfile() {
 
 
 }
+
+
 /**
- * POST REQUESTS
-*/
+ *               *
+ * POST REQUESTS *
+ *               *
+ */
 
 // Login POST request
 function loginUser(event) {
@@ -239,7 +246,9 @@ function makeComment(postId) {
 }
 
 /**
- * GET REQUESTS
+ *              *
+ * GET REQUESTS *
+ *              *
  */
 
 // Get profile and load the DOM with the response data
@@ -366,6 +375,63 @@ function listAllPosts() {
 
 listAllPosts();
 
+/**
+ *                *
+ * DELETE         *
+ * REQUESTS       *
+ *                *
+ */
+
+
+ // function to delete comment
+ function deleteComment(commentId, postId) {
+   fetch (`http://thesi.generalassemb.ly:8080/comment/${commentId}`, {
+     method: 'DELETE',
+     headers: {
+           "Authorization": "Bearer " + localStorage.getItem('user'),
+           "Content-Type": "application/json"
+         }
+   })
+   .then(function(response) {
+     if (response.status === 200) {
+       removeCommentFromDom(commentId, postId);
+     } else {
+       alert('Error. You are only allowed to delete your own comments.');
+     }
+   })
+   .catch((error) => {
+     console.log(error);
+   })
+ }
+
+// function to delete post
+
+function deletePost(id) {
+  fetch(`http://thesi.generalassemb.ly:8080/post/${id}`, {
+    method: 'DELETE',
+    headers: {
+          "Authorization": "Bearer " + localStorage.getItem('user'),
+          "Content-Type": "application/json"
+        }
+      })
+  .then((res) => {
+    document.querySelector('.posts').innerHTML = "";
+    listAllPosts();
+    })
+
+  .catch((error) => {
+  console.log(id);
+  })
+
+}
+
+/**
+ * DOM           *
+ * MANIPULATION  *
+ *               *
+ */
+
+
 function populatePosts(title, content, id, owner) {
   let userPost = document.createElement('div');
   userPost.classList = 'userPost';
@@ -420,26 +486,6 @@ function populatePosts(title, content, id, owner) {
 }
 
 
-function deleteComment(commentId, postId) {
-  fetch (`http://thesi.generalassemb.ly:8080/comment/${commentId}`, {
-    method: 'DELETE',
-    headers: {
-          "Authorization": "Bearer " + localStorage.getItem('user'),
-          "Content-Type": "application/json"
-        }
-  })
-  .then(function(response) {
-    if (response.status === 200) {
-      removeCommentFromDom(commentId, postId);
-    } else {
-      alert('Error. You are only allowed to delete your own comments.');
-    }
-  })
-  .catch((error) => {
-    console.log(error);
-  })
-}
-
 function removeCommentFromDom(commentId, postId) {
   let commentToRemove = document.querySelector((`[commentid="${commentId}"]`));
   let removeFromParent = document.querySelector((`[commentboxid="${postId}"]`));
@@ -463,25 +509,4 @@ function manipulateDomComments(commentId, commentText, id, commentOwner) {
     deleteComment(commentId, id);
   })
   p.append(deleteBtn);
-}
-
-// function to delete post
-
-function deletePost(id) {
-  fetch(`http://thesi.generalassemb.ly:8080/post/${id}`, {
-    method: 'DELETE',
-    headers: {
-          "Authorization": "Bearer " + localStorage.getItem('user'),
-          "Content-Type": "application/json"
-        }
-      })
-  .then((res) => {
-    document.querySelector('.posts').innerHTML = "";
-    listAllPosts();
-    })
-
-  .catch((error) => {
-  console.log(id);
-  })
-
 }
